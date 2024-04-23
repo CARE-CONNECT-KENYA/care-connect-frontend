@@ -1,0 +1,15 @@
+.header{
+    background-color: var(--primary-color);
+    height: 450px;
+    margin-top: 0px;
+    text-align: center;
+    border-radius: 6px;
+    display: grid;
+    place-items: center;
+    
+}
+.textheader{
+    color: #ffffff;
+    font-size: 3rem;
+   
+}
