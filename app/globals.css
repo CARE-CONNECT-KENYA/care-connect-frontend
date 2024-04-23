@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* If using plain CSS */
+@font-face {
+  font-family: 'Aleo';
+  src: url('../public/Aleo-Regular.ttf') 
+  /* Add other font weights and styles here if needed */
+}
+
+
+
 :root {
   --primary-color: #0B3C41;
   --secondary-color: #F6F7EF;
@@ -17,9 +26,12 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
+*{
+  font-family: 'Aleo';
+}
 body {
   padding: 1rem;
+  
 }
 
 @layer utilities {
