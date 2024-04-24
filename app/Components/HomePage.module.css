@@ -13,3 +13,58 @@
     font-size: 3rem;
    
 }
+.categories{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.categories p{
+    color: var(--primary-color);
+    opacity: 50%;
+    font-size: 1.2rem;
+}
+.categorylist li {
+    position: relative; /* Add position relative */
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    overflow: hidden; /* Hide overflow */
+}
+
+.categorylist li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Initial position, outside the element */
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    z-index: -1; /* Behind the content */
+    transition: left 0.5s ease; /* Smooth transition */
+}
+
+.categorylist li:hover::before {
+    left: 0; /* Move from left to right on hover */
+}
+
+.categorylist li:hover {
+    color: #ffffff;
+    letter-spacing: 1.14px;
+}
+
+.categoryheader{
+    font-size: 3rem;
+    font-weight: 400;
+}
+.caption{
+    margin-top: 15px;
+}
+.categorylist{
+    width: 80%;
+    display: grid;
+    
+}
