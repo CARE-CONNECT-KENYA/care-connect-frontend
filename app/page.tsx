@@ -1,4 +1,5 @@
 import HomeCategories from "./Components/HomeCategories";
+import HomeFaeturedlist from "./Components/HomeFaeturedlist";
 import HomeHeader from "./Components/HomeHeader";
 export default function Home() {
   return (
@@ -7,8 +8,12 @@ export default function Home() {
          <HomeHeader  />
       </div>
       
-      <div>
+      <div className="mb-14">
         <HomeCategories />
+      </div>
+
+      <div>
+        <HomeFaeturedlist />
       </div>
       
       

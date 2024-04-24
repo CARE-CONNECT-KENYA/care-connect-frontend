@@ -1,3 +1,4 @@
+/* This is the header section */
 .header{
     background-color: var(--primary-color);
     height: 450px;
@@ -11,8 +12,9 @@
 .textheader{
     color: #ffffff;
     font-size: 3rem;
-   
 }
+
+/* This is the second section of the home page  */
 .categories{
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -61,10 +63,21 @@
     font-weight: 400;
 }
 .caption{
-    margin-top: 15px;
+    margin-top: 50px;
 }
 .categorylist{
     width: 80%;
     display: grid;
     
+}
+
+/* Featured Listings section */
+
+.featuredList{
+    text-align: center;
+    font-size: 3rem;
+    letter-spacing: 1.14px;
+}
+.featuredList span{
+    border-bottom:  4px solid var(--primary-color);
 }

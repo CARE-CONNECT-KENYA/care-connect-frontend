@@ -16,19 +16,19 @@ function HomeCategories() {
         <div className={styles.categorylist}>
             <ul className={styles.categorylist}>
                 <li>
-                    Category 1
+                    PRIMARY CARE
                 </li>
                 <li>
-                    Category 1
+                    DENTIST
                 </li>
                 <li>
-                    Category 1
+                    DERMERTOLIGIST
                 </li>
                 <li>
-                    Category 1
+                    EYE DOCTOR
                 </li>
                 <li>
-                    Category 1
+                   PEDETRICIAN
                 </li>
             </ul>
 
