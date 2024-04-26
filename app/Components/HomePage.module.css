@@ -1,6 +1,6 @@
 /* This is the header section */
 .header{
-    background-color: var(--primary-color);
+    background-image: url('/images/care-connect-hero-image.jpg');
     height: 450px;
     margin-top: 0px;
     text-align: center;
@@ -80,4 +80,7 @@
 }
 .featuredList span{
     border-bottom:  4px solid var(--primary-color);
+}
+.header{
+    background-image: src();
 }
