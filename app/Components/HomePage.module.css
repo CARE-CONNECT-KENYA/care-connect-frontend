@@ -1,7 +1,7 @@
 /* This is the header section */
 .header{
     background-image: url('/images/care-connect-hero-image.jpg');
-    height: 450px;
+    height: 500px;
     margin-top: 0px;
     text-align: center;
     border-radius: 6px;
@@ -83,4 +83,39 @@
 }
 .header{
     background-image: src();
+}
+
+
+/* registartion area hoem page */
+
+.registertext h1{
+    font-size: 3rem; 
+    
+
+   
+}
+.registertext{
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    margin: auto;
+}
+.facilitybtn{
+    border: 1px solid #ccc ;
+    border-radius: 3px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    font-size: 1.25rem;
+}
+
+.doctorbtn{
+    border: 1px solid #ccc ;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 1.25rem;
+
 }

@@ -1,6 +1,7 @@
 import HomeCategories from "./Components/HomeCategories";
 import HomeFaeturedlist from "./Components/HomeFaeturedlist";
 import HomeHeader from "./Components/HomeHeader";
+import HomeRegister from "./Components/HomeRegister";
 export default function Home() {
   return (
     <div>
@@ -14,6 +15,9 @@ export default function Home() {
 
       <div>
         <HomeFaeturedlist />
+      </div>
+      <div>
+        <HomeRegister />
       </div>
       
       
