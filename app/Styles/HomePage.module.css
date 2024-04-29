@@ -137,6 +137,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .sercContent{
     display: grid;
     place-items: center;
@@ -153,3 +154,13 @@
 
 }
 
+/* Media query for mobile screens */
+@media (max-width: 768px) {
+    .sercContent,.categories,.registertext  {
+      grid-template-columns: 1fr; 
+      width: 90%;
+    }
+    .h1{
+        font-size: 1.25rem;
+    }
+  }
