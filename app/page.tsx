@@ -20,9 +20,9 @@ export default function Home() {
           <HomeFaeturedlist />
         </div>
 
-        {/* <div>
+        <div>
           <HomeSearch />
-        </div> */}
+        </div>
 
         <div>
           <HomeRegister />
