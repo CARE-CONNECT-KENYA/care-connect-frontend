@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./HomePage.module.css"
+import styles from "../Styles/HomePage.module.css"
 import Link from 'next/link'
 
 function HomeRegister() {
