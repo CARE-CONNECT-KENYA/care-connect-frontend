@@ -16,15 +16,15 @@ export default function Home() {
           <HomeCategories />
         </div>
 
-        <div>
-          <HomeFaeturedlist />
+        <div className="mb-14">
+          <HomeFaeturedlist  />
         </div>
 
-        {/* <div>
+        <div className="mb-14">
           <HomeSearch />
-        </div> */}
+        </div>
 
-        <div>
+        <div className="mb-14">
           <HomeRegister />
         </div>
       

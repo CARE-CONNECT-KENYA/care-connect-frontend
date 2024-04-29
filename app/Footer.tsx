@@ -5,7 +5,7 @@ function Footer() {
   return (
     <div className={styles.footerContainer}>
         <div>
-            <div className={'flex gap-20'}>
+            <div className={styles.shorcuts}>
                 <div>
                     <h3>SHORTCUTS</h3>
                     <ul>

@@ -1,10 +1,11 @@
 'use client'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 
 function NavBar() {
     const currentPath = usePathname();
+    const [isNavOpen, setIsNavOpen] = useState(false);
 
     const links = [
         { label: "HOME", href: "/" },
@@ -17,7 +18,37 @@ function NavBar() {
         <nav className='flex items-center justify-between mb-3 h-14'>
             <div className='flex items-center'>
                 <Link href="/"><h1>Care.<span>Connect</span></h1></Link>
-                <ul className='flex space-x-6 ml-6'>
+                {/* Display a button to toggle the navigation on mobile */}
+                <button 
+                    className="lg:hidden" 
+                    onClick={() => setIsNavOpen(!isNavOpen)}
+                >
+                    <svg
+                        className="w-6 h-6 text-gray-600 hover:text-gray-900"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        {isNavOpen ? (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        ) : (
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 6h16M4 12h16m-7 6h7"
+                            />
+                        )}
+                    </svg>
+                </button>
+                {/* Navigation links */}
+                <ul className={`lg:flex space-x-6 ml-6 ${isNavOpen ? 'block' : 'hidden'}`}>
                     {links.map(link =>
                         <li key={link.href}>
                             <Link
