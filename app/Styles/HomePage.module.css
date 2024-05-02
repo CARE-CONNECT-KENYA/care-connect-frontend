@@ -1,7 +1,7 @@
 /* This is the header section */
 
 .header{
-    background-image: url('/images/care-connect-hero-image.jpg');
+    background-image: url(/images/care-connect-hero-image.jpg);
     height: 500px;
     margin-top: 0px;
     text-align: center;
@@ -10,6 +10,7 @@
     place-items: center;
     
 }
+
 .textheader{
     color: #ffffff;
     font-size: 2.8rem;

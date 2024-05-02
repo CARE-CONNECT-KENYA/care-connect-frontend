@@ -1,0 +1,26 @@
+.line{
+    height: 1px;
+    background-color: black;
+    width: 50%;
+}
+
+.Signupform{
+    display: grid;
+    gap: 10px;
+}
+
+.Signupform input{
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.Signupform button{
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 50%;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}
