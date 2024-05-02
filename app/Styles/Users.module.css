@@ -1,0 +1,28 @@
+/* sign up form  */
+.line{
+    height: 1px;
+    background-color: black;
+    width: 32%;
+}
+
+.Signupform{
+    display: grid;
+    gap: 10px;
+}
+
+
+.Signupform input{
+    width: 70%;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.Signupform button{
+    padding: 5px;
+    border: 1px solid #ccc;
+    width: 70%;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+}

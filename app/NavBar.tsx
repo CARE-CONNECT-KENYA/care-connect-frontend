@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
+// Existing imports and code...
+
 function NavBar() {
     const currentPath = usePathname();
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -17,7 +19,7 @@ function NavBar() {
     return (
         <nav className='flex items-center justify-between mb-3 h-14'>
             <div className='flex items-center'>
-                <Link href="/"><h1>Care.<span>Connect</span></h1></Link>
+                <Link href="/"><h3>Care.<span>Connect</span></h3></Link>
                 {/* Display a button to toggle the navigation on mobile */}
                 <button 
                     className="lg:hidden" 
@@ -48,7 +50,7 @@ function NavBar() {
                     </svg>
                 </button>
                 {/* Navigation links */}
-                <ul className={`lg:flex space-x-6 ml-6 ${isNavOpen ? 'block' : 'hidden'}`}>
+                <ul className={`lg:flex lg:space-x-6 ml-6 ${isNavOpen ? 'block' : 'hidden lg:block'}`}>
                     {links.map(link =>
                         <li key={link.href}>
                             <Link
@@ -62,11 +64,12 @@ function NavBar() {
                 </ul>
             </div>
             <div className='flex space-x-6'>
-                <Link href="/">LOGIN</Link>
-                <Link href="/">SIGN UP</Link>
+                <Link href="/users/login">LOGIN</Link>
+                <Link href="/users/signup"> SIGN UP </Link>
             </div>
         </nav>
     );
 }
 
 export default NavBar;
+
