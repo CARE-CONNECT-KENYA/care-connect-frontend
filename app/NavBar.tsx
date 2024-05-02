@@ -64,7 +64,7 @@ function NavBar() {
                 </ul>
             </div>
             <div className='flex space-x-6'>
-                <Link href="/">LOGIN</Link>
+                <Link href="/users/login">LOGIN</Link>
                 <Link href="/users/signup"> SIGN UP </Link>
             </div>
         </nav>

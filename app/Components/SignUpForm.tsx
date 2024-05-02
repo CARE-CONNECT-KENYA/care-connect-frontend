@@ -16,7 +16,7 @@ function SignUpForm() {
         <div className='flex gap-3 mt-10'>
 
             <div className={styles.line}></div>
-            <div className='h-1'><h3>OR</h3></div>
+            <div className='mt-n10'><h3>OR</h3></div>
             <div className={styles.line}></div>
 
         </div>

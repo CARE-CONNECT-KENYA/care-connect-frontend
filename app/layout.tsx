@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,16 +13,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  withNavBar = true,
+  withFooter = true,
 }: Readonly<{
   children: React.ReactNode;
+  withNavBar?: boolean;
+  withFooter?: boolean;
 }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
+        {withNavBar && <NavBar />}
         {children}
-        <Footer />
-        </body>
+        {withFooter && <Footer />}
+      </body>
     </html>
   );
 }
+

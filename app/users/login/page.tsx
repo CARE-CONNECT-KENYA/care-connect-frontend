@@ -1,15 +1,18 @@
 import React from 'react'
+import RootLayout from '@/app/layout'
 
 
 
 function Userlogin() {
   return (
-    <div>
-      Userlogin
-      
-      
+ 
+      <RootLayout withFooter={false} withNavBar={false}>
+        <div>
+          <h2>LOGIN</h2>
+        </div>
+      </RootLayout>
 
-    </div>
+
   )
 }
 
