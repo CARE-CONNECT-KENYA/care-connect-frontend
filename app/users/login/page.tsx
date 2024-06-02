@@ -1,12 +1,8 @@
-
 'use client'
+
 import React from 'react';
 import styles from './login.module.css';
 import LoginForm from '@/app/Components/LoginForm';
-
-import React from 'react'
-import RootLayout from '@/app/layout'
-
 
 function Userlogin() {
   const handleLoginSuccess = (data) => {
