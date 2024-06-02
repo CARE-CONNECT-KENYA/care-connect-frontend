@@ -1,13 +1,12 @@
 import SignUpForm from '@/app/Components/SignUpForm'
 import React from 'react'
-import RootLayout from '@/app/layout'
 import styles from './signup.module.css'
 
 function UserSignup() {
   return (
    
-   <RootLayout withFooter={false} withNavBar={false}>
-       <div className={styles.signupPage} >
+  
+       <div className={styles.signupPage}>
         {/* Side containing the form */}
         <div className={styles.formComponent}>
           <SignUpForm />
@@ -23,7 +22,7 @@ function UserSignup() {
           </div>
         </div>
       </div>
-   </RootLayout>
+ 
 
   )
 }
