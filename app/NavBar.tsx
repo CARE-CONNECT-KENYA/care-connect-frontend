@@ -11,7 +11,7 @@ function NavBar() {
 
     const links = [
         { label: "HOME", href: "/" },
-        { label: "DOCTORS", href: "/" },
+        { label: "DOCTORS", href: "/Doctors" },
         { label: "FACILITIES", href: "/" },
         { label: "CATEGORIES", href: "/" },
     ];

@@ -1,0 +1,50 @@
+.CardContainer{
+    border: solid 1px #ccc;
+    display: flex;
+    gap: 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.CardContainer h4{
+    margin-top: -40px;
+    margin-left: 15px;
+    background-color: var(--primary-color);
+    position: absolute;
+    padding: 3px;
+    border-radius: 18px;
+    text-align: center;
+    width: 10%;
+    color: white;
+}
+
+.contentArea{
+    display: grid;
+   /* margin-top: 10px; */
+   /* max-width: 50%; */
+   align-content: space-evenly;
+}
+.contentArea h1{
+    font-size: 1.3rem;
+    font-weight: 600;
+    
+}
+
+.CardContainer img{
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
+}
+
+.callToAction button{
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 30%;
+    font-size: 18px; 
+    letter-spacing: 1.5px;
+    color: var(--primary-color);
+}
+.CardContainer span{
+    opacity: 50%;
+}

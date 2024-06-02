@@ -32,11 +32,15 @@
 }
 body {
   padding: 1rem;
+  margin: auto;
  
   
 }
 h1{
   font-size: 2.8rem;
+}
+p{
+  text-wrap: balance;
 }
 
 @layer utilities {
