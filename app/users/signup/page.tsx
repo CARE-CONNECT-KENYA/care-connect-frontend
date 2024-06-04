@@ -10,7 +10,7 @@ function UserSignup() {
        <div className={styles.signupPage}>
         {/* Side containing the form */}
         <div className={styles.formComponent}>
-          <SignUpForm />
+             <SignUpForm />
         </div>
         {/* Side containing the image */}
         <div className={styles.SignupSidebar}>

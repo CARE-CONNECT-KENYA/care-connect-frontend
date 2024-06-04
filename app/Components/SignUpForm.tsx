@@ -77,7 +77,7 @@ const SignUpForm: React.FC = () => {
 
   // JSX template
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.formContainer}>
       <div className={styles.Signupform}>
         <h3>Full Name</h3>
         <input
@@ -116,7 +116,7 @@ const SignUpForm: React.FC = () => {
       </div>
       <div className='flex gap-3 mt-10'>
         <div className={styles.line}></div>
-        <div className='mt-n10'>
+        <div className='mt-n20'>
           <h3>OR</h3>
         </div>
         <div className={styles.line}></div>

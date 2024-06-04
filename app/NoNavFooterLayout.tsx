@@ -12,10 +12,10 @@ export default function NoNavFooterLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+ 
       <body>
             {children}
       </body>
-    </html>
+  
   );
 }

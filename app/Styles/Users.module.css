@@ -2,16 +2,19 @@
 .line{
     height: 1px;
     background-color: black;
-    width: 32%;
+    width: 26%;
 }
-
+.formContainer{
+    margin-left: 70px;
+}
 .Signupform{
     display: grid;
     gap: 10px;
+    
 }
 
 .Signupform input{
-    width: 70%;
+    width: 60%;
     border: 1px solid #ccc;
     padding: 5px;
     border-radius: 3px;
@@ -20,7 +23,7 @@
 .Signupform button{
     padding: 5px;
     border: 1px solid #ccc;
-    width: 70%;
+    width: 60%;
     color: #ffffff;
     background-color: var(--primary-color);
     border-radius: 3px;
