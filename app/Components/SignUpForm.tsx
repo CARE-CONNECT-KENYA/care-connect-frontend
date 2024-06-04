@@ -79,7 +79,7 @@ const SignUpForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       <div className={styles.Signupform}>
-        <h3>Full Name</h3>
+        <h6>Full Name</h6>
         <input
           type='text'
           name='fullname'
@@ -90,7 +90,7 @@ const SignUpForm: React.FC = () => {
         />
         {error.fullname && <p className={styles.error}>{error.fullname}</p>}
 
-        <h3>Email</h3>
+        <h6>Email</h6>
         <input
           type='text'
           name='email'
@@ -101,7 +101,7 @@ const SignUpForm: React.FC = () => {
         />
         {error.email && <p className={styles.error}>{error.email}</p>}
 
-        <h3>Password</h3>
+        <h6>Password</h6>
         <input
           type='password'
           name='password'
@@ -117,7 +117,7 @@ const SignUpForm: React.FC = () => {
       <div className='flex gap-3 mt-10'>
         <div className={styles.line}></div>
         <div className='mt-n20'>
-          <h3>OR</h3>
+          <h6>OR</h6>
         </div>
         <div className={styles.line}></div>
       </div>

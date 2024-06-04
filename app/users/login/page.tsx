@@ -1,8 +1,10 @@
 'use client'
 
 import React from 'react';
-import styles from './login.module.css';
+import styles from '../signup/signup.module.css';
 import LoginForm from '@/app/Components/LoginForm';
+import NoNavFooterLayout from '@/app/NoNavFooterLayout';
+
 
 function Userlogin() {
   const handleLoginSuccess = (data) => {
@@ -11,6 +13,7 @@ function Userlogin() {
   };
 
   return (
+   <NoNavFooterLayout> 
     <div className={styles.signupPage}>
       {/* Side containing the form */}
       <div className={styles.formComponent}>
@@ -24,10 +27,11 @@ function Userlogin() {
           <div className={styles.line}></div>
         </div>
         <div className={styles.bottomPart}>
-          <h1>SIGN UP</h1>
+          <h1>SIGN IN</h1>
         </div>
       </div>
     </div>
+    </NoNavFooterLayout> 
   );
 }
 

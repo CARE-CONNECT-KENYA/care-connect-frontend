@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
+import styles from '../Styles/Users.module.css';
 
 interface LoginFormProps {
   onSuccess: (data: any) => void;
@@ -30,16 +31,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Email:</label>
+      <div className={styles.Signupform} >
+      <div >
+        <h6>Email</h6>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </div>
       <div>
-        <label>Password:</label>
+        <h6>Password</h6>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
       </div>
       {error && <p>{error}</p>}
       <button type="submit">Login</button>
+      </div>
     </form>
   );
 };
