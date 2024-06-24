@@ -42,6 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       </div>
       {error && <p>{error}</p>}
       <button type="submit">Login</button>
+    
       </div>
     </form>
   );

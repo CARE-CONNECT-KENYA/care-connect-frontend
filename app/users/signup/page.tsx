@@ -1,5 +1,6 @@
 import SignUpForm from '@/app/Components/SignUpForm'
 import React from 'react'
+import Link from 'next/link'
 import styles from './signup.module.css'
 import NoNavFooterLayout from '@/app/NoNavFooterLayout'
 
@@ -11,6 +12,10 @@ function UserSignup() {
         {/* Side containing the form */}
         <div className={styles.formComponent}>
              <SignUpForm />
+             <div className={styles.navigationOption}>
+              <p> I have an account </p>
+              <Link href='/users/login'> LOGIN </Link>
+             </div>
         </div>
         {/* Side containing the image */}
         <div className={styles.SignupSidebar}>

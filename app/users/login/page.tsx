@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from '../signup/signup.module.css';
+import Link from 'next/link';
 import LoginForm from '@/app/Components/LoginForm';
 import NoNavFooterLayout from '@/app/NoNavFooterLayout';
 
@@ -19,6 +20,10 @@ function Userlogin() {
       <div className={styles.formComponent}>
         {/* Pass handleLoginSuccess as onSuccess prop */}
         <LoginForm onSuccess={handleLoginSuccess} />
+          <div className={styles.navigationOption}>
+              <p> I have an account </p>
+              <Link href='/users/signup'> SIGN UP </Link>
+            </div>
       </div>
       {/* Side containing the image */}
       <div className={styles.SignupSidebar}>
