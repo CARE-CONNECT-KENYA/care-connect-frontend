@@ -4,8 +4,9 @@ import styles from "../Styles/RegistartionForm.module.css"
 function page() {
   return (
     <div className={styles.RegistartionConatiner}>
-        <div>
+        <div className={styles.item}>
             <form className={styles.ProvidersForm}>
+
                 <input type='text' placeholder='Providername' /> 
                 <input type='text' placeholder='email' />
                 <input type='number' placeholder='Phone number'/>
@@ -22,7 +23,7 @@ function page() {
                 
             </form>
         </div>
-        <div>
+        <div className={styles.item}>
             <h1>Benefits of registration</h1>
         </div>
       
