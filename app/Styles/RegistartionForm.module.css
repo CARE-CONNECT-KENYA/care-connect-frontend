@@ -1,0 +1,15 @@
+.ProvidersForm{
+display: grid;
+gap: 20px;
+}
+
+.ProvidersForm input{
+    width: 60%;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+}
+.RegistartionConatiner{
+    display: flex;
+    justify-content: space-around;
+}
