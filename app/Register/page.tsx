@@ -14,10 +14,12 @@ function page() {
                 <textarea placeholder='description' />
                 <input type='file' placeholder='Upload profile image' /> 
                 <input type='text' placeholder='Services' />
-                <label>Select Working Hours</label>
-                <select>
-                    <option>Mon - Friday 8:00AM - 5PM</option>
-                </select>
+                <input list='datalist-hours' placeholder='choose working hours'/>
+                <datalist id="datalist-hours">
+                    <option>MON-FRID 8:00AM - 5:00PM</option>
+                    <option>MON-FRID 8:00AM - 5:00PM</option>
+                </datalist>
+                
             </form>
         </div>
         <div>
