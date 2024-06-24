@@ -6,7 +6,6 @@ function page() {
     <div className={styles.RegistartionConatiner}>
         <div className={styles.item}>
             <form className={styles.ProvidersForm}>
-
                 <input type='text' placeholder='Providername' /> 
                 <input type='text' placeholder='email' />
                 <input type='number' placeholder='Phone number'/>
@@ -20,11 +19,12 @@ function page() {
                     <option>MON-FRID 8:00AM - 5:00PM</option>
                     <option>MON-FRID 8:00AM - 5:00PM</option>
                 </datalist>
-                
+
             </form>
+
         </div>
         <div className={styles.item}>
-            <h1>Benefits of registration</h1>
+            <h2>Benefits of registration</h2>
         </div>
       
     </div>
