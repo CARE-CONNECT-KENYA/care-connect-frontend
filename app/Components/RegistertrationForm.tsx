@@ -23,8 +23,9 @@ function RegistertrationForm() {
                         <option>MON-FRID 8:00AM - 5:00PM</option>
                         <option>MON-FRID 8:00AM - 5:00PM</option>
                     </datalist>
-                    <label>Choose procider type</label>
+                
                     <select>
+                        <option value="" disabled selected hidden>Choose Provider type</option>
                         <option>Facility</option>
                         <option>Doctor</option>
                     </select>
@@ -45,21 +46,21 @@ function RegistertrationForm() {
 
         {/* Doctors form */}
         <div className={styles.DoctorDetails}>
+  
             <form className={styles.ProvidersForm}>
-                <input type='text' placeholder='specialties' />
                 <input type='text' placeholder='Languages'/>
-                <input type="text" placeholder='conditions' />
-                <input type='text' placeholder='procedures' />
-                <input type='text' placeholder='insurance' />
-                <label>
-                    Gender
-                </label>
                 <select>
+                    <option value="" disabled selected hidden>Doctors Gender</option>
                     <option>Male</option>
                     <option>Female</option>
                     <option>Rather Not say</option>
                 </select>
-
+                <input type='text' placeholder='specialties' />
+                
+                <input type="text" placeholder='conditions' />
+                <input type='text' placeholder='procedures' />
+                <input type='text' placeholder='insurance' />
+      
             </form>
 
         </div>

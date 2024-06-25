@@ -103,3 +103,15 @@
 
     width:min(95%, 70rem);
 }
+
+.DoctorDetails{
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-columns: 1fr;
+    padding-block: 4rem;
+
+    width:min(95%, 70rem);
+    
+}
+
+ 
