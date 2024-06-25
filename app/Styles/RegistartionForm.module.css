@@ -5,7 +5,22 @@
 .ProvidersForm input{
 
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 10px;
+    border-radius: 3px;
+    
+   
+}
+.ProvidersForm textarea{
+    border: solid 1px #ccc;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    padding: 10px;
+
+}
+.ProvidersForm select{
+    background-color: none;
+    border: 1px solid #ccc;
+    padding: 10px;
     border-radius: 3px;
 }
 
@@ -19,4 +34,72 @@
     flex: 0 0 calc(50% - 10px);
     padding: 10px;
     text-align: centers;
+}
+
+.ProviderDetails form{
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-columns: 1fr;
+    padding-block: 4rem;
+
+    width:min(95%, 70rem);
+    grid-template-areas: 
+    'one one'
+    'two three'
+    'four five'
+    'six six'
+    'seven seven'
+    'eight nine'
+    ;
+}
+.ProviderDetails input:nth-child(1) {
+    grid-area: one;
+}
+
+.ProviderDetails input:nth-child(2) {
+    grid-area: two;
+}
+
+.ProviderDetails input:nth-child(3) {
+    grid-area: three;
+}
+
+.ProviderDetails input:nth-child(4) {
+    grid-area: four;
+}
+
+.ProviderDetails input:nth-child(5) {
+    grid-area: five;
+}
+
+.ProviderDetails textarea {
+    grid-area: six;
+}
+
+.ProviderDetails input:nth-child(7) {
+    grid-area: seven;
+}
+
+.ProviderDetails input:nth-child(8) {
+    grid-area: eight;
+}
+
+.ProviderDetails input:nth-child(9) {
+    grid-area: nine;
+}
+
+.columnSpan2 {
+    grid-column: span 2;
+    padding-bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid #D3D3D3;
+}
+
+.FacilityDetails{
+    display: grid;
+    gap: 1.5rem;
+    grid-auto-columns: 1fr;
+    padding-block: 4rem;
+
+    width:min(95%, 70rem);
 }

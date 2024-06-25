@@ -14,6 +14,7 @@ function NavBar() {
         { label: "DOCTORS", href: "/Doctors" },
         { label: "FACILITIES", href: "/" },
         { label: "CATEGORIES", href: "/" },
+        {label: "REGISTER", href: "/Register"}
     ];
 
     return (
