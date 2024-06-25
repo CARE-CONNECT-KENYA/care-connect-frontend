@@ -1,12 +1,25 @@
 'use client'
+
 import React from 'react'
+import { useState } from 'react'
 import styles from '../Styles/RegistartionForm.module.css'
 
 
 function RegistertrationForm() {
+
+  const [step, setStep] = useState(1);
+
+  const handleNext = async () =>{
+    setStep(step + 1);
+
+  }
+
+ 
+
   return (
     <div >
         {/* provider form */}
+        { step === 1 && (
         <div className={styles.ProviderDetails}>
             <form  className={styles.ProvidersForm} >
                     <input type='text' placeholder='Providername'/> 
@@ -29,22 +42,30 @@ function RegistertrationForm() {
                         <option>Facility</option>
                         <option>Doctor</option>
                     </select>
+                    <button type="button" onClick={handleNext}>Next</button>
             </form>
         </div>
+         )}
 
         {/* facility form */}
+        { step === 2 && (
         <div className={styles.FacilityDetails}> 
             <form className={styles.ProvidersForm}>
                 <input type='text' placeholder='insurance' />
                 <input type='text' placeholder='specialties' />
                 <input type='file' placeholder='facility photos'/>
+                <button type="button" onClick={handleNext}>Next</button>
 
             </form>
 
         </div>
+        )}
         
+    
 
         {/* Doctors form */}
+        { step === 3 && (
+        
         <div className={styles.DoctorDetails}>
   
             <form className={styles.ProvidersForm}>
@@ -60,10 +81,12 @@ function RegistertrationForm() {
                 <input type="text" placeholder='conditions' />
                 <input type='text' placeholder='procedures' />
                 <input type='text' placeholder='insurance' />
+                <button type="button" onClick={handleNext}>Submit</button>
       
             </form>
 
         </div>
+        )}
         
     </div>
   )
