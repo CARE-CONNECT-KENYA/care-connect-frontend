@@ -18,6 +18,13 @@ interface ProviderData {
   userId: string;
 }
 
+interface FacilityData {
+  providerID: string;
+  facilityphotos: string;
+  insurance: string;
+  specialties: string;
+}
+
 interface DoctorData {
   providerID: string;
   LanguagesSpoken: string;
@@ -111,11 +118,25 @@ const RegistrationForm: React.FC = () => {
       console.error('No access token found');
       return;
     }
-
+  
     try {
       const headers = { Authorization: `Bearer ${token}` };
-
-      if (step === 3 && providerType === 'Doctor') {
+  
+      if (step === 2 && providerType === 'Facility') {
+        const facilityData: FacilityData = {
+          providerID : providerID!,
+          facilityphotos: (e.currentTarget.elements.namedItem('facilityPhotos') as HTMLInputElement).value,
+          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value,
+          specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
+        };
+  
+        // Log the facility data
+        console.log('Submitting Facility Data:', facilityData);
+  
+        // Submit facility data to the backend
+        await axios.post('/care/newfacility', facilityData, { headers });
+        console.log('Facility registered successfully');
+      } else if (step === 3 && providerType === 'Doctor') {
         const doctorData: DoctorData = {
           providerID: providerID!,
           LanguagesSpoken: (e.currentTarget.elements.namedItem('LanguagesSpoken') as HTMLInputElement).value,
@@ -125,19 +146,30 @@ const RegistrationForm: React.FC = () => {
           Procedureperformed: (e.currentTarget.elements.namedItem('Procedureperformed') as HTMLInputElement).value,
           insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value
         };
-
+  
         // Log the doctor data
         console.log('Submitting Doctor Data:', doctorData);
-
+  
+        // Submit doctor data to the backend
         await axios.post('/care/newdoctor', doctorData, { headers });
         console.log('Doctor registered successfully');
       }
+  
+      // Optionally, you can navigate to the next step after submission if needed
+      if (providerType === 'Facility' && step === 2) {
+        setStep(3);
+      } else if (providerType === 'Doctor' && step === 3) {
+        setStep(4);
+      } else {
+        setStep(step + 1);
+      }
+  
     } catch (error) {
       // Log the error response from the server
       console.error('Error submitting form:', error.response ? error.response.data : error.message);
     }
   };
-
+  
   return (
     <div>
       {step === 1 && (
