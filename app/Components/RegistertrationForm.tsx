@@ -18,20 +18,13 @@ interface ProviderData {
   userId: string;
 }
 
-interface FacilityData {
-  providerID: string;
-  insurance: string;
-  specialties: string;
-  facilityPhotos: string;
-}
-
 interface DoctorData {
   providerID: string;
-  languages: string;
-  gender: string;
+  LanguagesSpoken: string;
+  Gender: string;
   specialties: string;
-  conditions: string;
-  procedures: string;
+  conditionsTreated: string;
+  Procedureperformed: string;
   insurance: string;
 }
 
@@ -74,9 +67,10 @@ const RegistrationForm: React.FC = () => {
         // Log the response from the server
         console.log('Provider Response:', response);
 
-        const providerID = response.data.id;
+        const providerID = response.data.providerID;
         setProviderId(providerID);
         localStorage.setItem('providerID', providerID);
+        console.log(providerID)
 
         if (providerType === 'Facility') {
           setStep(2);
@@ -121,44 +115,21 @@ const RegistrationForm: React.FC = () => {
     try {
       const headers = { Authorization: `Bearer ${token}` };
 
-      if (step === 2 && providerType === 'Facility') {
-        const facilityData: FacilityData = {
-          providerID: providerID!,
-          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value,
-          specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
-          facilityPhotos: (e.currentTarget.elements.namedItem('facilityPhotos') as HTMLInputElement).value
-        };
-
-        // Log the facility data
-        console.log('Submitting Facility Data:', facilityData);
-
-        const formData = new FormData();
-        for (let key in facilityData) {
-          formData.append(key, (facilityData as any)[key]);
-        }
-
-        await axios.post('/care/newfacility', formData, { headers });
-        console.log('Facility registered successfully');
-      } else if (step === 3 && providerType === 'Doctor') {
+      if (step === 3 && providerType === 'Doctor') {
         const doctorData: DoctorData = {
           providerID: providerID!,
-          languages: (e.currentTarget.elements.namedItem('languages') as HTMLInputElement).value,
-          gender: (e.currentTarget.elements.namedItem('gender') as HTMLSelectElement).value,
+          LanguagesSpoken: (e.currentTarget.elements.namedItem('LanguagesSpoken') as HTMLInputElement).value,
+          Gender: (e.currentTarget.elements.namedItem('Gender') as HTMLSelectElement).value,
           specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
-          conditions: (e.currentTarget.elements.namedItem('conditions') as HTMLInputElement).value,
-          procedures: (e.currentTarget.elements.namedItem('procedures') as HTMLInputElement).value,
+          conditionsTreated: (e.currentTarget.elements.namedItem('conditionsTreated') as HTMLInputElement).value,
+          Procedureperformed: (e.currentTarget.elements.namedItem('Procedureperformed') as HTMLInputElement).value,
           insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value
         };
 
         // Log the doctor data
         console.log('Submitting Doctor Data:', doctorData);
 
-        const formData = new FormData();
-        for (let key in doctorData) {
-          formData.append(key, (doctorData as any)[key]);
-        }
-
-        await axios.post('/care/newdoctor', formData, { headers });
+        await axios.post('/care/newdoctor', doctorData, { headers });
         console.log('Doctor registered successfully');
       }
     } catch (error) {
@@ -178,7 +149,6 @@ const RegistrationForm: React.FC = () => {
             <input name='phoneNumber' type='number' placeholder='Phone number' />
             <input name='location' type='text' placeholder='Location' />
             <input name='website' type='text' placeholder='Website' />
-      
             <input name='services' type='text' placeholder='Services (comma-separated)' />
             <input name='profileImage' type='text' placeholder='Profile image URL' />
             <input name='workingHours' list='datalist-hours' placeholder='Choose working hours' />
@@ -214,16 +184,15 @@ const RegistrationForm: React.FC = () => {
       {step === 3 && providerType === 'Doctor' && (
         <div className={styles.DoctorDetails}>
           <form className={styles.ProvidersForm} onSubmit={handleSubmit}>
-            <input name='languages' type='text' placeholder='Languages' />
-            <select name='gender'>
+            <input name='LanguagesSpoken' type='text' placeholder='Languages Spoken' />
+            <select name='Gender'>
               <option value='' disabled selected hidden>Doctor's Gender</option>
               <option value='Male'>Male</option>
               <option value='Female'>Female</option>
-              <option value='Rather Not say'>Rather Not say</option>
             </select>
             <input name='specialties' type='text' placeholder='Specialties' />
-            <input name='conditions' type='text' placeholder='Conditions' />
-            <input name='procedures' type='text' placeholder='Procedures' />
+            <input name='conditionsTreated' type='text' placeholder='Conditions Treated' />
+            <input name='Procedureperformed' type='text' placeholder='Procedures Performed' />
             <input name='insurance' type='text' placeholder='Insurance' />
             <div className={styles.ButtonContainer}>
               <button type='button' onClick={handleBack}>Back</button>
