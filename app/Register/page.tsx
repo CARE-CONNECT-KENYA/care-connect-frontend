@@ -11,7 +11,7 @@ function page() {
             
         </div>
         <div className={styles.item}>
-            <h2>Benefits of registration</h2>
+            <h1>Benefits of registration</h1>
         </div>
       
     </div>

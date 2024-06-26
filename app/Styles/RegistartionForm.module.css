@@ -1,3 +1,5 @@
+
+
 .ProvidersForm{
     display: grid;
     gap: 10px;
@@ -13,21 +15,27 @@
 .ProvidersForm textarea{
     border: solid 1px #ccc;
     border-radius: 3px;
-    margin-bottom: 5px;
     padding: 10px;
 
 }
 .ProvidersForm select{
-    background-color: none;
+    background-color: white;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 3px;
 }
 
+.RegistartionConatiner h1{
+    text-align: center;
+    font-size: 32px;
+}
 .RegistartionConatiner{
     display: flex;
     flex: 1;
     justify-content: space-around;
+}
+.optionsDropdown{
+    background-color: red;
 }
 
 .item {
@@ -36,20 +44,21 @@
     text-align: centers;
 }
 
-/* .ProviderDetails form{
+.ProviderDetails form{
     display: grid;
     gap: 1.5rem;
     grid-auto-columns: 1fr;
-    padding-block: 4rem;
+    padding-block: 1rem;
 
     width:min(95%, 70rem);
     grid-template-areas: 
     'one one'
     'two three'
-    'four five'
-    'six six'
+    'four four'
+    'five six'
     'seven seven'
     'eight nine'
+    'ten eleven'
     ;
 }
 .ProviderDetails input:nth-child(1) {
@@ -63,22 +72,24 @@
 .ProviderDetails input:nth-child(3) {
     grid-area: three;
 }
-
-.ProviderDetails input:nth-child(4) {
-    grid-area: four;
+.ProviderDetails textarea{
+   grid-area: four;
 }
+
 
 .ProviderDetails input:nth-child(5) {
     grid-area: five;
 }
 
-.ProviderDetails textarea {
+.ProviderDetails input:nth-child(6) {
     grid-area: six;
 }
 
 .ProviderDetails input:nth-child(7) {
     grid-area: seven;
+   
 }
+
 
 .ProviderDetails input:nth-child(8) {
     grid-area: eight;
@@ -86,7 +97,22 @@
 
 .ProviderDetails input:nth-child(9) {
     grid-area: nine;
-} */
+} 
+
+.ProviderDetails button {
+    grid-area: eleven;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 3px;
+    width: 50%;
+} 
+
+.ProviderDetails select:nth-child(10){
+    grid-area: ten;
+    
+}
+
+
 
 .columnSpan2 {
     grid-column: span 2;
@@ -113,5 +139,14 @@
     width:min(95%, 70rem);
     
 }
+
+.Error{
+    width: 95%;
+    background-color: red;
+    border-radius: 3px;
+    padding: 10px;
+    color: white;
+ }
+
 
  

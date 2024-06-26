@@ -209,9 +209,9 @@ const RegistrationForm: React.FC = () => {
         <div className={styles.ProviderDetails}>
           <form className={styles.ProvidersForm} onSubmit={handleSubmit}>
             <input name='providerName' type='text' placeholder='Provider name' />
-            <textarea name='bio' placeholder='Bio' />
             <input name='email' type='text' placeholder='Email' />
             <input name='phoneNumber' type='number' placeholder='Phone number' />
+            <textarea name='bio' placeholder='Bio' />
             <input name='location' type='text' placeholder='Location' />
             <input name='website' type='text' placeholder='Website' />
             <input name='services' type='text' placeholder='Services (comma-separated)' />
@@ -221,7 +221,7 @@ const RegistrationForm: React.FC = () => {
               <option>MON-FRI 8:00AM - 5:00PM</option>
               <option>MON-FRI 8:00AM - 5:00PM</option>
             </datalist>
-            <select name='providerType' onChange={handleProviderTypeChange}>
+            <select name='providerType' className={styles.selectDropdown} onChange={handleProviderTypeChange}>
               <option value='' disabled selected hidden>Choose Provider type</option>
               <option value='Facility'>Facility</option>
               <option value='Doctor'>Doctor</option>
