@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import styles from '../Styles/RegistartionForm.module.css';
+import styles from '../Styles/RegistartionForm.module.css'
 
 interface ProviderData {
   bio: string;
@@ -41,6 +41,7 @@ const RegistrationForm: React.FC = () => {
   const [providerID, setProviderId] = useState<string | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [loginError, setLoginError] = useState<boolean>(false); // State for login error
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleNext = async () => {
     const token = localStorage.getItem('access_token');
@@ -51,6 +52,21 @@ const RegistrationForm: React.FC = () => {
     }
 
     try {
+      let imageUrl = '';
+
+      if (imageFile) {
+        const formData = new FormData();
+        formData.append('file', imageFile);
+        formData.append('upload_preset', 'ngo-connect');
+
+        const cloudinaryResponse = await axios.post(
+          'https://api.cloudinary.com/v1_1/dmrtbhnzu/image/upload',
+          formData
+        );
+
+        imageUrl = cloudinaryResponse.data.secure_url;
+      }
+
       const userId = JSON.parse(atob(token.split('.')[1])).user_id;
       const headers = { Authorization: `Bearer ${token}` };
 
@@ -61,7 +77,7 @@ const RegistrationForm: React.FC = () => {
           email: (document.getElementsByName('email')[0] as HTMLInputElement).value,
           phoneNumber: (document.getElementsByName('phoneNumber')[0] as HTMLInputElement).value,
           workingHours: (document.getElementsByName('workingHours')[0] as HTMLInputElement).value,
-          profileImage: (document.getElementsByName('profileImage')[0] as HTMLInputElement).value,
+          profileImage: imageUrl,
           website: (document.getElementsByName('website')[0] as HTMLInputElement).value,
           location: (document.getElementsByName('location')[0] as HTMLInputElement).value,
           providerType,
@@ -80,7 +96,7 @@ const RegistrationForm: React.FC = () => {
         const providerID = response.data.providerID;
         setProviderId(providerID);
         localStorage.setItem('providerID', providerID);
-        console.log(providerID)
+        console.log(providerID);
 
         if (providerType === 'Facility') {
           setStep(2);
@@ -115,6 +131,12 @@ const RegistrationForm: React.FC = () => {
     setProviderType(e.target.value);
   };
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImageFile(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const token = localStorage.getItem('access_token');
@@ -122,21 +144,21 @@ const RegistrationForm: React.FC = () => {
       console.error('No access token found');
       return;
     }
-  
+
     try {
       const headers = { Authorization: `Bearer ${token}` };
-  
+
       if (step === 2 && providerType === 'Facility') {
         const facilityData: FacilityData = {
-          providerID : providerID!,
+          providerID: providerID!,
           facilityphotos: (e.currentTarget.elements.namedItem('facilityPhotos') as HTMLInputElement).value,
           insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value,
           specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
         };
-  
+
         // Log the facility data
         console.log('Submitting Facility Data:', facilityData);
-  
+
         // Submit facility data to the backend
         await axios.post('/care/newfacility', facilityData, { headers });
         console.log('Facility registered successfully');
@@ -150,15 +172,15 @@ const RegistrationForm: React.FC = () => {
           Procedureperformed: (e.currentTarget.elements.namedItem('Procedureperformed') as HTMLInputElement).value,
           insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value
         };
-  
+
         // Log the doctor data
         console.log('Submitting Doctor Data:', doctorData);
-  
+
         // Submit doctor data to the backend
         await axios.post('/care/newdoctor', doctorData, { headers });
         console.log('Doctor registered successfully');
       }
-  
+
       // Optionally, you can navigate to the next step after submission if needed
       if (providerType === 'Facility' && step === 2) {
         setStep(3);
@@ -167,14 +189,14 @@ const RegistrationForm: React.FC = () => {
       } else {
         setStep(step + 1);
       }
-  
+
     } catch (error) {
       // Log the error response from the server
       console.error('Error submitting form:', error.response ? error.response.data : error.message);
-      setError(error.response ? error.response.data : error.message);
+      setErrors([error.response ? error.response.data.message : error.message]);
     }
   };
-  
+
   return (
     <div>
       {loginError && (
@@ -193,7 +215,7 @@ const RegistrationForm: React.FC = () => {
             <input name='location' type='text' placeholder='Location' />
             <input name='website' type='text' placeholder='Website' />
             <input name='services' type='text' placeholder='Services (comma-separated)' />
-            <input name='profileImage' type='text' placeholder='Profile image URL' />
+            <input name='profileImage' type='file' onChange={handleFileChange} />
             <input name='workingHours' list='datalist-hours' placeholder='Choose working hours' />
             <datalist id='datalist-hours'>
               <option>MON-FRI 8:00AM - 5:00PM</option>
@@ -207,11 +229,11 @@ const RegistrationForm: React.FC = () => {
             <button type='button' onClick={handleNext}>Next</button>
             <button type='submit' hidden></button>
           </form>
-            {errors.length > 0 && (
-              <div className={styles.ErrorContainer}>
-                <p className={styles.Error}>{errors[0]}</p>
-              </div>
-            )}
+          {errors.length > 0 && (
+            <div className={styles.ErrorContainer}>
+              <p className={styles.Error}>{errors[0]}</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -220,17 +242,17 @@ const RegistrationForm: React.FC = () => {
           <form className={styles.ProvidersForm} onSubmit={handleSubmit}>
             <input name='insurance' type='text' placeholder='Insurance' />
             <input name='specialties' type='text' placeholder='Specialties' />
-            <input name='facilityPhotos' type='text' placeholder='Facility photos URL' />
+            <input name='facilityPhotos' type='file' placeholder='Facility photos URL' />
             <div className={styles.ButtonContainer}>
               <button type='button' onClick={handleBack}>Back</button>
               <button type='submit'>Submit</button>
             </div>
           </form>
           {errors.length > 0 && (
-              <div className={styles.ErrorContainer}>
-                <p className={styles.Error}>{errors[0]}</p>
-              </div>
-            )}
+            <div className={styles.ErrorContainer}>
+              <p className={styles.Error}>{errors[0]}</p>
+            </div>
+          )}
         </div>
       )}
 
@@ -253,10 +275,10 @@ const RegistrationForm: React.FC = () => {
             </div>
           </form>
           {errors.length > 0 && (
-              <div className={styles.ErrorContainer}>
-                <p className={styles.Error}>{errors[0]}</p>
-              </div>
-            )}
+            <div className={styles.ErrorContainer}>
+              <p className={styles.Error}>{errors[0]}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
