@@ -36,7 +36,7 @@
     text-align: centers;
 }
 
-.ProviderDetails form{
+/* .ProviderDetails form{
     display: grid;
     gap: 1.5rem;
     grid-auto-columns: 1fr;
@@ -86,7 +86,7 @@
 
 .ProviderDetails input:nth-child(9) {
     grid-area: nine;
-}
+} */
 
 .columnSpan2 {
     grid-column: span 2;
