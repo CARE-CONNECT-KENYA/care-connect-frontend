@@ -8,10 +8,12 @@ type Provider = {
   reg_date: string;
   email: string;
   location: string;
-  phoneNumber: string; // Changed from `phonenumber` to `phoneNumber` to match type
+  phoneNumber: string; 
   id: number;
-  providerName: string;
+  name: string;
   services: string[];
+  providerType:string;
+  profileImage:string;
 };
 
 function ProvidersCard() {
@@ -55,12 +57,12 @@ function ProvidersCard() {
         <div key={provider.id} className={styles.CardContainer}>
           <div>
             {/* Image and provider tag */}
-            <img src='/images/doctors.jpg' alt='provider card image' />
-            <h4>{/* Assuming there's a provider type or similar info */}</h4>
+            <img src={provider.profileImage} />
+            <h4>{provider.providerType}</h4>
           </div>
           <div className={styles.contentArea}>
             {/* Provider details */}
-            <h1>{provider.providerName}</h1>
+            <h1>{provider.name}</h1>
             <p><span>Specialties:</span> {provider.services.join(' | ')}</p>
             <p>Rating</p>
             <p>{provider.bio}</p>
