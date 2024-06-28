@@ -16,7 +16,7 @@
 .Signupform input{
     width: 60%;
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 10px;
     border-radius: 3px;
 }
 
@@ -33,3 +33,16 @@
     background-color: var(--primary-color);
     border-radius: 3px;
 }
+.passwordContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .eyeIcon {
+    position: absolute;
+    left: 55%;
+    cursor: pointer;
+    font-size: 22px;
+  }
+  

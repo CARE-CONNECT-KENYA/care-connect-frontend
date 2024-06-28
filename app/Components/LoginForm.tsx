@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import axios from 'axios';
 import styles from '../Styles/Users.module.css';
@@ -11,6 +11,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,18 +32,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={styles.Signupform} >
-      <div >
-        <h6>Email</h6>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-      </div>
-      <div>
-        <h6>Password</h6>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      </div>
-      {error && <p>{error}</p>}
-      <button type="submit">Login</button>
-    
+      <div className={styles.Signupform}>
+        <div>
+          <h6>Email</h6>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+        <div >
+          <h6>Password</h6>
+          <div className={styles.passwordContainer} >
+          <input
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <span className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? '🙈' : '👁️'}
+          </span>
+          </div>
+        </div>
+        {error && <p>{error}</p>}
+        <button type="submit">Login</button>
       </div>
     </form>
   );
