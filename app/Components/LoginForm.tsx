@@ -1,6 +1,6 @@
 'use client';
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import axios from 'axios';
 import styles from '../Styles/Users.module.css';
 
@@ -13,7 +13,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+  const pathname = usePathname(); // Use usePathname
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +45,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       setError('Invalid email or password');
     }
   };
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
