@@ -1,96 +1,82 @@
-'use client'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import styles from '../../styles/ProviderDetail.module.css';
 
-const ProviderDetails = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    providerType: '',
-    website: '',
-    description: ''
-  });
+// Define the Provider type
+type Provider = {
+  bio: string;
+  email: string;
+  id: number;
+  location: string;
+  name: string;
+  number: number;
+  profileImage: string;
+  reg_date: string;
+  services: string[];
+  status: boolean;
+  user_id: number;
+  website: string;
+  workingHours: string;
+};
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+const ProviderDetail: React.FC = () => {
+  const [provider, setProvider] = useState<Provider | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleNext = async () => {
-    // Define endpoint URLs for each step
-    const endpoints = [
-      '/api/step1',
-      '/api/step2',
-      '/api/step3'
-    ];
+  const router = useRouter();
+  const { id } = router.query;
 
-    // Send data to the current step endpoint
-    await fetch(endpoints[step - 1], {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    });
+  useEffect(() => {
+    const fetchProvider = async () => {
+      if (id) {
+        try {
+          const response = await fetch(`/care/superadmin/provider/${id}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+          });
 
-    // Move to the next step
-    setStep(step + 1);
-  };
+          if (!response.ok) {
+            throw new Error('Failed to fetch provider details');
+          }
+
+          const data = await response.json();
+          setProvider(data);
+        } catch (error) {
+          setError((error as Error).message);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchProvider();
+  }, [id]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
-      {step === 1 && (
-        <form>
-          <input 
-            type="text" 
-            name="name" 
-            placeholder="Enter Name" 
-            value={formData.name} 
-            onChange={handleChange} 
-          />
-          <input 
-            type="text" 
-            name="phone" 
-            placeholder="+254" 
-            value={formData.phone} 
-            onChange={handleChange} 
-          />
-          <button type="button" onClick={handleNext}>Next</button>
-        </form>
-      )}
-
-      {step === 2 && (
-        <form>
-          <input 
-            type="text" 
-            name="providerType" 
-            placeholder="Provider Type" 
-            value={formData.providerType} 
-            onChange={handleChange} 
-          />
-          <input 
-            type="text" 
-            name="website" 
-            placeholder="Website Link" 
-            value={formData.website} 
-            onChange={handleChange} 
-          />
-          <button type="button" onClick={handleNext}>Next</button>
-        </form>
-      )}
-
-      {step === 3 && (
-        <form>
-          <textarea 
-            name="description" 
-            placeholder="Description About the provider type" 
-            value={formData.description} 
-            onChange={handleChange} 
-          />
-          <button type="button" onClick={handleNext}>Submit</button>
-        </form>
+    <div className={styles.Container}>
+      {provider && (
+        <>
+          <img src={provider.profileImage} alt={provider.name} className={styles.ProfileImage} />
+          <h1>{provider.name}</h1>
+          <p>{provider.bio}</p>
+          <p>Email: {provider.email}</p>
+          <p>Location: {provider.location}</p>
+          <p>Phone Number: {provider.number}</p>
+          <p>Website: <a href={provider.website} target="_blank" rel="noopener noreferrer">{provider.website}</a></p>
+          <p>Working Hours: {provider.workingHours}</p>
+          <p>Registered Date: {provider.reg_date}</p>
+          <p>Services: {provider.services.join(', ')}</p>
+        </>
       )}
     </div>
   );
 };
 
-export default ProviderDetails;
+export default ProviderDetail;
