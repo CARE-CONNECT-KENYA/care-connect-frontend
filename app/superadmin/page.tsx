@@ -1,8 +1,11 @@
 import React from 'react'
+import Approveapplications from '../Components/SuperadminComponents/Approveapplications'
 
 function SuperAdmin() {
   return (
-    <div>SuperAdmin</div>
+    <div>
+      <Approveapplications/>
+    </div>
   )
 }
 

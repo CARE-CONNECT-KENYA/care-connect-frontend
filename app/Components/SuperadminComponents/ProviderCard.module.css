@@ -1,0 +1,39 @@
+.ProviderRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust the gap between cards as needed */
+  }
+  
+  .CardContainer {
+    background-color: #f9f9f9; /* Light grey background */
+    border: 1px solid #ddd; /* Light grey border */
+    border-radius: 8px;
+    padding: 16px;
+    width: 300px; /* Adjust the width of the card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .CardContainer h2 {
+    font-size: 1.25em;
+    margin-bottom: 8px;
+  }
+  
+  .CardContainer p {
+    margin: 4px 0;
+  }
+  
+  .CardContainer button {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  
+  .CardContainer button:disabled {
+    background-color: #ccc; /* Grey background when disabled */
+    cursor: not-allowed;
+  }
+  
