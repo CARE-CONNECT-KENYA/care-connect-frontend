@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../Styles/Users.module.css';
 
@@ -12,6 +13,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +27,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       localStorage.setItem('role', data.role);
       // Trigger success callback
       onSuccess(data);
+      // Redirect based on role
+      if (data.role === 'admin') {
+        router.push('/provider/admin');
+      } else if (data.role === 'super_admin') {
+        router.push('/superadmin');
+      } else {
+        router.push('/');
+      }
     } catch (error) {
       setError('Invalid email or password');
     }
@@ -37,18 +47,18 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           <h6>Email</h6>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </div>
-        <div >
+        <div>
           <h6>Password</h6>
-          <div className={styles.passwordContainer} >
-          <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <span className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
-            {showPassword ? '🙈' : '👁️'}
-          </span>
+          <div className={styles.passwordContainer}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <span className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? '🙈' : '👁️'}
+            </span>
           </div>
         </div>
         {error && <p>{error}</p>}

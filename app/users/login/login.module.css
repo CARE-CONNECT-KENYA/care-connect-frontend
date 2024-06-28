@@ -21,7 +21,7 @@
 .topPart{
     display: flex;
     gap: 16px;
-    height: 75vh;
+    height: 80vh;
 }
 
 .line{
