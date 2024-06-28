@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import styles from '../Styles/ProviderCard.module.css';
 
 type Provider = {
   bio: string;
-  created_at: string;
+  reg_date: string;
   email: string;
   location: string;
-  phonenumber: number;
-  providerID: number;
+  phoneNumber: string; // Changed from `phonenumber` to `phoneNumber` to match type
+  id: number;
   providerName: string;
   services: string[];
 };
@@ -27,7 +27,7 @@ function ProvidersCard() {
       }
 
       try {
-        const response = await fetch('/care/allproviders', {
+        const response = await fetch('care/providers', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -40,11 +40,7 @@ function ProvidersCard() {
         }
 
         const data = await response.json();
-        if (Array.isArray(data)) {
-          setProviders(data);
-        } else {
-          console.error('Invalid data structure:', data);
-        }
+        setProviders(data.providerlist); // Assuming `providerlist` is always present
       } catch (error) {
         console.error('Error fetching providers:', error);
       }
@@ -56,7 +52,7 @@ function ProvidersCard() {
   return (
     <div>
       {providers.map((provider) => (
-        <div key={provider.providerID} className={styles.CardContainer}>
+        <div key={provider.id} className={styles.CardContainer}>
           <div>
             {/* Image and provider tag */}
             <img src='/images/doctors.jpg' alt='provider card image' />
