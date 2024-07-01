@@ -1,0 +1,50 @@
+
+.SingleProviderHeader{
+    background-color: var(--primary-color);
+    padding: 20px;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+.TopDetails {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center; /* Center the .TopDetails div horizontally */
+    align-items: center; /* Center the contents vertically */
+    margin: 0 auto; /* Center the div within its container */
+    max-width: 80%; /* Optional: Set a maximum width for the content */
+
+}
+.TopDetails p{
+    font-size: 1rem;
+}
+
+.TopLeft img {
+    object-fit: cover;
+    height: 270px;
+    width: 350px;
+    border-radius: 3px;
+
+}
+.ContacInfo{
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+ 
+}
+
+.TopRight span{
+    opacity: 50%;
+    color: var(--primary-color);
+}
+
+.ReadMore {
+    cursor: pointer;
+    color: blue; /* Optional: Change the color of the read more text */
+    text-decoration: underline; /* Optional: Add underline to the read more text */
+}
+
+.bio{
+    max-width: 900px;
+}

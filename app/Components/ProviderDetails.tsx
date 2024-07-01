@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import styles from '../Styles/Singleprovider.module.css'
 
 // Define the types
 type Provider = {
@@ -45,6 +46,7 @@ const ProviderDetail: React.FC = () => {
   const [facilityDetails, setFacilityDetails] = useState<FacilityDetails[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showFullBio, setShowFullBio] = useState(false);
 
   const pathname = usePathname();
   const id = pathname?.split('/').pop();
@@ -119,22 +121,49 @@ const ProviderDetail: React.FC = () => {
     fetchProvider();
   }, [id]);
 
+  const handleReadMoreToggle = () => {
+    setShowFullBio(!showFullBio);
+  };
+
+  const truncateBio = (bio: string) => {
+    const maxLength = 200;
+    if (bio.length > maxLength && !showFullBio) {
+      return bio.slice(0, maxLength) + '...';
+    }
+    return bio;
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div className={styles.SingleproviderConatiner}>
+      <div className={styles.SingleProviderHeader}>
+        <p>Header place something</p>
+      </div>
       {provider && (
         <>
-          <img src={provider.profileImage} alt={provider.name} />
-          <h1>{provider.name}</h1>
-          <p>{provider.bio}</p>
-          <p>Email: {provider.email}</p>
-          <p>Location: {provider.location}</p>
-          <p>Phone Number: {provider.number}</p>
-          <p>Website: <a href={provider.website} target="_blank" rel="noopener noreferrer">{provider.website}</a></p>
-          <p>Working Hours: {provider.workingHours}</p>
-          <p>Registered Date: {provider.reg_date}</p>
+          <div className={styles.TopDetails}>
+            <div className={styles.TopLeft}>
+              <img src={provider.profileImage} alt={provider.name} />
+              <p>Working Hours: {provider.workingHours}</p>
+            </div>
+            <div className={styles.TopRight}>
+              <h1>{provider.name}</h1>
+              <div className={styles.ContacInfo}>
+                <p><span>Phone Number: </span>{provider.number}</p>
+                <p><span>Email:</span> {provider.email}</p>
+              </div>
+              <div className={styles.ContacInfo}>
+                <p><span>Location:</span> {provider.location}</p>
+                <div></div>
+              </div>
+              <p className={styles.bio}>{truncateBio(provider.bio)} <span onClick={handleReadMoreToggle} className={styles.ReadMore}>
+                {showFullBio ? 'Show less' : 'Read more'}
+              </span></p>
+            </div>
+          </div>
+
           <p>Services: {provider.services}</p>
 
           {provider.providerType === 'Doctor' && doctorDetails && (
