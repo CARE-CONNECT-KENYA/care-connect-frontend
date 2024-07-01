@@ -9,16 +9,19 @@ type Provider = {
   reg_date: string;
   email: string;
   location: string;
-  phoneNumber: string; 
+  phoneNumber: string;
   id: number;
   name: string;
   services: string[];
-  providerType:string;
-  profileImage:string;
+  providerType: string;
+  profileImage: string;
 };
+
+const ITEMS_PER_PAGE = 9;
 
 function ProvidersCard() {
   const [providers, setProviders] = useState<Provider[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const router = useRouter();
 
   useEffect(() => {
@@ -57,9 +60,23 @@ function ProvidersCard() {
     router.push(`/provider/${id}`);
   };
 
+  const truncateBio = (bio: string) => {
+    const maxLength = 150;
+    if (bio.length > maxLength) {
+      return bio.slice(0, maxLength) + '...';
+    }
+    return bio;
+  };
+
+  const indexOfLastProvider = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstProvider = indexOfLastProvider - ITEMS_PER_PAGE;
+  const currentProviders = providers.slice(indexOfFirstProvider, indexOfLastProvider);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   return (
     <div>
-      {providers.map((provider) => (
+      {currentProviders.map((provider) => (
         <div key={provider.id} className={styles.CardContainer}>
           <div>
             {/* Image and provider tag */}
@@ -69,15 +86,22 @@ function ProvidersCard() {
           <div className={styles.contentArea}>
             {/* Provider details */}
             <h1>{provider.name}</h1>
-            <p><span>Specialties:</span> {provider.services.join(' | ')}</p>
             <p>Rating</p>
-            <p>{provider.bio}</p>
+            <p><span>Specialties:</span> {provider.services.join(' | ')}</p>
+            <p>{truncateBio(provider.bio)}</p>
             <div className={styles.callToAction}>
               <button type='button' onClick={() => handleKnowMoreClick(provider.id)}>Know More</button>
             </div>
           </div>
         </div>
       ))}
+      <div className={styles.pagination}>
+        {Array.from({ length: Math.ceil(providers.length / ITEMS_PER_PAGE) }, (_, index) => (
+          <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

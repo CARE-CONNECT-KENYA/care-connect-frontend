@@ -66,10 +66,14 @@ function FeaturedProviders() {
                 <img src={provider.profileImage}  />
             </div>
             <div>
-                <p>{provider.providerType}</p>
+                <div className={styles.featuredDetails}>
+                    <p className={styles.higlight}>{provider.providerType}</p>
+                    <p>Rating</p>
+
+                </div>
                 <h1>{provider.name}</h1>
             </div>
-            <div className={styles.callToAction}>
+            <div className={styles.featureCAT}>
               <button type='button' onClick={() => handleKnowMoreClick(provider.id)}>Know More</button>
             </div>
           </div>
