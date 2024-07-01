@@ -50,3 +50,15 @@
 .CardContainer span{
     opacity: 50%;
 }
+.FeaturedCardContainer{
+    display: flex;
+    gap: 10px;
+ 
+    
+}
+.FeaturedCard img{
+    width: 379px;
+    height: 218px;
+    object-fit: contain;
+
+}

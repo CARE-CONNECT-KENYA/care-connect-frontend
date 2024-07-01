@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "../Styles/HomePage.module.css"
+import FeaturedProviders from './FeaturedProviders'
 
 function HomeFaeturedlist() {
   return (
@@ -13,7 +14,7 @@ function HomeFaeturedlist() {
         </div>
 
         <div>
-            {/* Add the fetched cards from another component */}
+            <FeaturedProviders />
         </div>
     </div>
   )
