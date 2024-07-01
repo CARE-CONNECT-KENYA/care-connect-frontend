@@ -1,6 +1,6 @@
+'use client'
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import styles from '../../styles/ProviderDetail.module.css';
+import { usePathname } from 'next/navigation';
 
 // Define the Provider type
 type Provider = {
@@ -24,14 +24,14 @@ const ProviderDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const router = useRouter();
-  const { id } = router.query;
+  const pathname = usePathname();
+  const id = pathname?.split('/').pop();
 
   useEffect(() => {
     const fetchProvider = async () => {
       if (id) {
         try {
-          const response = await fetch(`/care/superadmin/provider/${id}`, {
+          const response = await fetch(`/care/provider/${id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -60,10 +60,10 @@ const ProviderDetail: React.FC = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className={styles.Container}>
+    <div>
       {provider && (
         <>
-          <img src={provider.profileImage} alt={provider.name} className={styles.ProfileImage} />
+          <img src={provider.profileImage} alt={provider.name} />
           <h1>{provider.name}</h1>
           <p>{provider.bio}</p>
           <p>Email: {provider.email}</p>

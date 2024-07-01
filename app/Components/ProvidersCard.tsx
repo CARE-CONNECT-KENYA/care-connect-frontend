@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from '../Styles/ProviderCard.module.css';
 
 type Provider = {
@@ -18,6 +19,7 @@ type Provider = {
 
 function ProvidersCard() {
   const [providers, setProviders] = useState<Provider[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -51,6 +53,10 @@ function ProvidersCard() {
     fetchProviders();
   }, []);
 
+  const handleKnowMoreClick = (id: number) => {
+    router.push(`/provider/${id}`);
+  };
+
   return (
     <div>
       {providers.map((provider) => (
@@ -67,7 +73,7 @@ function ProvidersCard() {
             <p>Rating</p>
             <p>{provider.bio}</p>
             <div className={styles.callToAction}>
-              <button type='button'>Know More</button>
+              <button type='button' onClick={() => handleKnowMoreClick(provider.id)}>Know More</button>
             </div>
           </div>
         </div>
