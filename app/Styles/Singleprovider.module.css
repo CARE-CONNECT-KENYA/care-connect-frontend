@@ -38,7 +38,14 @@
     opacity: 50%;
     color: var(--primary-color);
 }
-
+.Phonenumber{
+    background-color: var(--primary-color);
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #ffffff;
+    border-radius: 20px;
+}
 .ReadMore {
     cursor: pointer;
     color: blue; /* Optional: Change the color of the read more text */

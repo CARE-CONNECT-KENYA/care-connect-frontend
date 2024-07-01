@@ -151,7 +151,7 @@ const ProviderDetail: React.FC = () => {
             <div className={styles.TopRight}>
               <h1>{provider.name}</h1>
               <div className={styles.ContacInfo}>
-                <p><span>Phone Number: </span>{provider.number}</p>
+                <p className={styles.Phonenumber}>{provider.number}</p>
                 <p><span>Email:</span> {provider.email}</p>
               </div>
               <div className={styles.ContacInfo}>
@@ -162,13 +162,15 @@ const ProviderDetail: React.FC = () => {
                 {showFullBio ? 'Show less' : 'Read more'}
               </span></p>
             </div>
+            
           </div>
 
-          <p>Services: {provider.services}</p>
+          
 
           {provider.providerType === 'Doctor' && doctorDetails && (
             <div>
               <h2>Doctor Details</h2>
+              <p>Services: {provider.services}</p>
               {doctorDetails.map((doctor) => (
                 <div key={doctor.id}>
                   <p>Gender: {doctor.gender}</p>
