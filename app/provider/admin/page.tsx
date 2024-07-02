@@ -1,8 +1,11 @@
+import ProviderAdminDetails from '@/app/Components/admin/ProviderAdminDetails'
 import React from 'react'
 
 function AdminProvider() {
   return (
-    <div>AdminProvider</div>
+    <>
+      <ProviderAdminDetails />
+    </>
   )
 }
 

@@ -10,12 +10,17 @@ function NavBar() {
     const currentPath = usePathname();
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [fullname, setFullname] = useState<string | null>(null);
+    const [role, setRole] = useState<string | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     useEffect(() => {
         const storedFullname = localStorage.getItem('fullname');
+        const storedRole = localStorage.getItem('role');
         if (storedFullname) {
             setFullname(storedFullname);
+        }
+        if (storedRole) {
+            setRole(storedRole);
         }
     }, []);
 
@@ -23,6 +28,7 @@ function NavBar() {
 
     const handleLogout = () => {
         localStorage.removeItem('fullname');
+        localStorage.removeItem('role');
         window.location.href = '/users/login'; // Redirect to login page after logout
     };
 
@@ -91,6 +97,16 @@ function NavBar() {
                         </div>
                         {isDropdownOpen && (
                             <div className='absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg'>
+                                {role === 'admin' && (
+                                    <Link href="/provider/admin" className='w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200 block'>
+                                        Dashboard
+                                    </Link>
+                                )}
+                                {role === 'super_admin' && (
+                                    <Link href="/superadmin" className='w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200 block'>
+                                        Manage Providers
+                                    </Link>
+                                )}
                                 <button className='w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200' onClick={handleLogout}>
                                     Logout
                                 </button>
