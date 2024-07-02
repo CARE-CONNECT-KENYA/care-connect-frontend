@@ -1,27 +1,37 @@
+// NavBar.tsx
 'use client'
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
-
-// Existing imports and code...
+import React, { useEffect, useState } from 'react';
+import styles from  './Styles/navbar.module.css'
 
 function NavBar() {
     const currentPath = usePathname();
     const [isNavOpen, setIsNavOpen] = useState(false);
+    const [fullname, setFullname] = useState<string | null>(null);
+
+    useEffect(() => {
+        const storedFullname = localStorage.getItem('fullname');
+        if (storedFullname) {
+            setFullname(storedFullname);
+        }
+    }, []);
+
+    const getInitial = (name: string) => name.charAt(0).toUpperCase();
 
     const links = [
         { label: "HOME", href: "/" },
-        { label: "DOCTORS", href: "/Doctors" },
+        { label: "DOCTORS", href: "/doctors" },
         { label: "FACILITIES", href: "/" },
         { label: "CATEGORIES", href: "/" },
-        {label: "REGISTER", href: "/Register"}
+        { label: "REGISTER", href: "/register" }
     ];
 
     return (
         <nav className='flex items-center justify-between mb-3 h-14'>
             <div className='flex items-center'>
                 <Link href="/"><h3>Care.<span>Connect</span></h3></Link>
-                {/* Display a button to toggle the navigation on mobile */}
                 <button 
                     className="lg:hidden" 
                     onClick={() => setIsNavOpen(!isNavOpen)}
@@ -50,7 +60,6 @@ function NavBar() {
                         )}
                     </svg>
                 </button>
-                {/* Navigation links */}
                 <ul className={`lg:flex lg:space-x-6 ml-6 ${isNavOpen ? 'block' : 'hidden lg:block'}`}>
                     {links.map(link =>
                         <li key={link.href}>
@@ -64,13 +73,21 @@ function NavBar() {
                     )}
                 </ul>
             </div>
-            <div className='flex space-x-6'>
-                <Link href="/users/login">LOGIN</Link>
-                <Link href="/users/signup"> SIGN UP </Link>
+            <div className='flex space-x-3 items-center'>
+                {fullname ? (
+                    <>
+                        <div className={styles.avatar}>{getInitial(fullname)}</div>
+                        <p className='text-lg'>{fullname}</p>
+                    </>
+                ) : (
+                    <>
+                        <Link href="/users/login">LOGIN</Link>
+                        <Link href="/users/signup">SIGN UP</Link>
+                    </>
+                )}
             </div>
         </nav>
     );
 }
 
 export default NavBar;
-

@@ -1,9 +1,8 @@
+// RootLayout.tsx
 import "./globals.css";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Metadata } from "next";
-
-
 
 export const metadata: Metadata = {
   title: "Care connect",
@@ -25,4 +24,3 @@ export default function RootLayout({
     </html>
   );
 }
-

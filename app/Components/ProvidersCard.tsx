@@ -75,6 +75,7 @@ function ProvidersCard() {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
+    <>
     <div>
       {currentProviders.map((provider) => (
         <div key={provider.id} className={styles.CardContainer}>
@@ -103,6 +104,7 @@ function ProvidersCard() {
         ))}
       </div>
     </div>
+    </>
   );
 }
 
