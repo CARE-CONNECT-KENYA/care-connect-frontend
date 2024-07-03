@@ -42,6 +42,7 @@ const RegistrationForm: React.FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [loginError, setLoginError] = useState<boolean>(false); // State for login error
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleNext = async () => {
     const token = localStorage.getItem('access_token');
@@ -115,9 +116,9 @@ const RegistrationForm: React.FC = () => {
         }
       }
     } catch (error) {
-      // Log the error response from the server
-      console.error('Error submitting form:', error.response ? error.response.data : error.message);
-      setErrors([error.response ? error.response.data.message : error.message]);
+
+      setError((error as Error).message);
+      
     }
   };
 

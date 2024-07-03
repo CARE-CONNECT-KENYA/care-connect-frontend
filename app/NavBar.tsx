@@ -41,6 +41,7 @@ function NavBar() {
     ];
 
     return (
+        <>
         <nav className='flex items-center justify-between mb-3 h-14'>
             <div className='flex items-center'>
                 <Link href="/"><h3>Care.<span>Connect</span></h3></Link>
@@ -121,6 +122,7 @@ function NavBar() {
                 )}
             </div>
         </nav>
+        </>
     );
 }
 

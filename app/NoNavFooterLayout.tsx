@@ -13,9 +13,9 @@ export default function NoNavFooterLayout({
 }) {
   return (
  
-      <body>
+      <section>
             {children}
-      </body>
+     </section>
   
   );
 }

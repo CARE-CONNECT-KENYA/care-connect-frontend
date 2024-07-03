@@ -42,7 +42,7 @@ function ProviderAdminDetails() {
         const data = await response.json(); 
         setProviderAdmin(data);
       } catch (error) {
-        setError(error.message);
+        setError((error as Error).message);
       }
     };
 
