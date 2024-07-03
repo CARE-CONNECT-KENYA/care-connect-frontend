@@ -1,0 +1,4 @@
+{
+    "npm.fetchOnlinePackageInfo": true,
+    "typescript.disableAutomaticTypeAcquisition": false
+}

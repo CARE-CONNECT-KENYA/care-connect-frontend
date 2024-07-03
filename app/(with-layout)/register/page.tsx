@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from "../Styles/RegistartionForm.module.css"
-import RegistrationForm from '../Components/RegistertrationForm'
+import styles from '../../Styles/RegistartionForm.module.css'
+import RegistrationForm from '../../Components/RegistertrationForm'
+
 
 
 
@@ -8,7 +9,8 @@ function page() {
   return (
     <div className={styles.RegistartionConatiner}>
         <div className={styles.item}>
-            <RegistrationForm />
+          <RegistrationForm/>
+            
             
         </div>
         <div className={styles.item}>

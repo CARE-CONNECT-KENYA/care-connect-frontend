@@ -1,13 +1,14 @@
-import SignUpForm from '@/app/Components/SignUpForm'
+
 import React from 'react'
 import Link from 'next/link'
 import styles from './signup.module.css'
-import NoNavFooterLayout from '@/app/NoNavFooterLayout'
+import SignUpForm from '../../../Components/SignUpForm'
+
 
 function UserSignup() {
   return (
     
-   <NoNavFooterLayout>
+   
        <div className={styles.signupPage}>
         {/* Side containing the form */}
         <div className={styles.formComponent}>
@@ -28,7 +29,7 @@ function UserSignup() {
           </div>
         </div>
       </div>
-   </NoNavFooterLayout>
+  
 
   )
 }

@@ -1,5 +1,7 @@
-import ProviderAdminDetails from '@/app/Components/admin/ProviderAdminDetails'
+
 import React from 'react'
+import ProviderAdminDetails from '../../Components/admin/ProviderAdminDetails'
+
 
 function AdminProvider() {
   return (

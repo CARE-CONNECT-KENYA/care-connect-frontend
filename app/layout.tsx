@@ -1,7 +1,5 @@
 // RootLayout.tsx
 import "./globals.css";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,9 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NavBar />
         {children}
-        <Footer />
       </body>
     </html>
   );

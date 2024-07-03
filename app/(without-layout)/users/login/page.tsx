@@ -3,8 +3,8 @@
 import React from 'react';
 import styles from '../signup/signup.module.css';
 import Link from 'next/link';
-import LoginForm from '@/app/Components/LoginForm';
-import NoNavFooterLayout from '@/app/NoNavFooterLayout';
+import LoginForm from '../../../Components/LoginForm';
+
 
 
 function Userlogin() {
@@ -14,12 +14,12 @@ function Userlogin() {
   };
 
   return (
-   <NoNavFooterLayout> 
+   
     <div className={styles.signupPage}>
       {/* Side containing the form */}
       <div className={styles.formComponent}>
         {/* Pass handleLoginSuccess as onSuccess prop */}
-        <LoginForm onSuccess={handleLoginSuccess} />
+         <LoginForm onSuccess={handleLoginSuccess} />
           <div className={styles.navigationOption}>
               <p> I have an account </p>
               <Link href='/users/signup'> SIGN UP </Link>
@@ -36,7 +36,7 @@ function Userlogin() {
         </div>
       </div>
     </div>
-    </NoNavFooterLayout> 
+    
   );
 }
 

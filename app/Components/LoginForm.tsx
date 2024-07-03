@@ -35,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       onSuccess(data);
       // Redirect based on role
       if (data.role === 'admin') {
-        router.push('/provider/admin');
+        router.push('/admin');
       } else if (data.role === 'super_admin') {
         router.push('/superadmin');
       } else {

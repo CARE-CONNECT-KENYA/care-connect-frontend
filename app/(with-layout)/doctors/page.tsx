@@ -1,6 +1,7 @@
 import React from 'react'
-import ProvidersCard from '../Components/ProvidersCard'
-import styles from '../Styles/listings.module.css'
+
+import styles from '../../Styles/listings.module.css'
+import ProvidersCard from '../../Components/ProvidersCard'
 
 function DoctorsList() {
   return (
