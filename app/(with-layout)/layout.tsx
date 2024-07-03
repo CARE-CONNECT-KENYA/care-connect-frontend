@@ -8,13 +8,16 @@ export default function WithLayout({
     children: React.ReactNode;
   }) {
     return (
-      <html lang="en">
-        <body>
-        <NavBar/>
+  
+        <main>
+          <NavBar/>
           {children}
           <Footer/>
-        </body>
-      </html>
+        
+        </main>
+     
+       
+     
     );
   }
   

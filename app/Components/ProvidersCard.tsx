@@ -77,7 +77,7 @@ function ProvidersCard() {
   return (
     <>
     <div>
-      {currentProviders.map((provider) => (
+      {currentProviders.map((provider, id) => (
         <div key={provider.id} className={styles.CardContainer}>
           <div>
             {/* Image and provider tag */}
