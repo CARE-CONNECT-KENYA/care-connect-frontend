@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import styles from '../Styles/Singleprovider.module.css';
+import ProviderReviews from './ProviderReviews';
+
 
 // Define the types
 type Provider = {
@@ -19,6 +21,7 @@ type Provider = {
   website: string;
   workingHours: string;
   providerType: string; // Added providerType
+  providerID: number;
 };
 
 type DoctorDetails = {
@@ -241,9 +244,11 @@ const ProviderDetail: React.FC = () => {
                 )}
               </div>
             </div>
+            <ProviderReviews providerID={id}/>
           </>
         )}
       </div>
+     
     </>
   );
 };
