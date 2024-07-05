@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import styles from '../Styles/Singleprovider.module.css';
 import ProviderReviews from './ProviderReviews';
+import ReviewForm from './ReviewForm';
 
 
 // Define the types
@@ -245,6 +246,7 @@ const ProviderDetail: React.FC = () => {
               </div>
             </div>
             <ProviderReviews providerID={id}/>
+            <ReviewForm providerID={id}/>
           </>
         )}
       </div>
