@@ -15,6 +15,7 @@ type Provider = {
   services: string[];
   providerType: string;
   profileImage: string;
+  rating: number;
 };
 
 const ITEMS_PER_PAGE = 9;
@@ -56,6 +57,22 @@ function ProvidersCard() {
     fetchProviders();
   }, []);
 
+  const renderStars = (rating: number | null) =>{
+    if (rating === null ){
+      return <p>No rating</p>    }
+      
+      const stars = [];
+      for (let i = 0; i<5; i++){
+        stars.push(
+          <span key={i} className={i < rating ? styles.filleStar : styles.emptyStar}>
+            ★
+          </span>
+        )
+
+      }
+      return stars;
+  };
+
   const handleKnowMoreClick = (id: number) => {
     router.push(`/provider/${id}`);
   };
@@ -87,7 +104,7 @@ function ProvidersCard() {
           <div className={styles.contentArea}>
             {/* Provider details */}
             <h1>{provider.name}</h1>
-            <p>Rating</p>
+            <div className={styles.stars}>{renderStars(provider.rating)}</div>
             <p><span>Specialties:</span> {provider.services.join(' | ')}</p>
             <p>{truncateBio(provider.bio)}</p>
             <div className={styles.callToAction}>

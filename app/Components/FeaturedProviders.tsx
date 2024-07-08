@@ -15,6 +15,7 @@ type Provider = {
   services: string[];
   providerType:string;
   profileImage:string;
+  rating: number | null;
 };
 
 function FeaturedProviders() {
@@ -57,25 +58,39 @@ function FeaturedProviders() {
     router.push(`/provider/${id}`);
   };
 
+  const renderStars = (rating: number | null) => {
+    if (rating === null) {
+      return <p>No rating</p>;
+    }
+
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(
+        <span key={i} className={i < rating ? styles.filledStar : styles.emptyStar}>
+          
+        </span>
+      );
+    }
+
+    return stars;
+  };
+
   return (
     <div className={styles.FeaturedCardContainer}>
       {providers.map((provider) => (
-        <div key={provider.id} >
-          <div className={styles.FeaturedCard}>
-            <div>
-                <img src={provider.profileImage}  />
+        <div key={provider.id} className={styles.FeaturedCard}>
+          <div>
+            <img src={provider.profileImage} alt={`${provider.name}'s profile`} />
+          </div>
+          <div>
+            <div className={styles.featuredDetails}>
+              <p className={styles.highlight}>{provider.providerType}</p>
+              <div className={styles.stars}>{renderStars(provider.rating)}</div>
             </div>
-            <div>
-                <div className={styles.featuredDetails}>
-                    <p className={styles.higlight}>{provider.providerType}</p>
-                    <p>Rating</p>
-
-                </div>
-                <h1>{provider.name}</h1>
-            </div>
-            <div className={styles.featureCAT}>
-              <button type='button' onClick={() => handleKnowMoreClick(provider.id)}>Know More</button>
-            </div>
+            <h1>{provider.name}</h1>
+          </div>
+          <div className={styles.featureCAT}>
+            <button type='button' onClick={() => handleKnowMoreClick(provider.id)}>Know More</button>
           </div>
         </div>
       ))}
