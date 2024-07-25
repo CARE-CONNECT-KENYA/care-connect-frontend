@@ -2,7 +2,7 @@
 
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-import styles from '../Styles/RegistartionForm.module.css'
+import styles from '../Styles/RegistartionForm.module.css';
 
 interface ProviderData {
   bio: string;
@@ -44,11 +44,38 @@ const RegistrationForm: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const validateFields = (fields: { name: string; value: string }[]): string[] => {
+    const fieldErrors: string[] = [];
+    fields.forEach((field) => {
+      if (!field.value.trim()) {
+        fieldErrors.push(`${field.name} should not be empty`);
+      }
+    });
+    return fieldErrors;
+  };
+
   const handleNext = async () => {
     const token = localStorage.getItem('access_token');
     if (!token) {
-      console.error('Login is required ');
+      console.error('Login is required');
       setLoginError(true); // Set login error state to true
+      return;
+    }
+
+    const commonFields = [
+      { name: 'Provider name', value: (document.getElementsByName('providerName')[0] as HTMLInputElement).value },
+      { name: 'Email', value: (document.getElementsByName('email')[0] as HTMLInputElement).value },
+      { name: 'Phone number', value: (document.getElementsByName('phoneNumber')[0] as HTMLInputElement).value },
+      { name: 'Bio', value: (document.getElementsByName('bio')[0] as HTMLTextAreaElement).value },
+      { name: 'Location', value: (document.getElementsByName('location')[0] as HTMLInputElement).value },
+      { name: 'Website', value: (document.getElementsByName('website')[0] as HTMLInputElement).value },
+      { name: 'Working hours', value: (document.getElementsByName('workingHours')[0] as HTMLInputElement).value },
+      { name: 'Provider type', value: providerType },
+    ];
+
+    const fieldErrors = validateFields(commonFields);
+    if (fieldErrors.length > 0) {
+      setErrors(fieldErrors);
       return;
     }
 
@@ -83,28 +110,39 @@ const RegistrationForm: React.FC = () => {
           location: (document.getElementsByName('location')[0] as HTMLInputElement).value,
           providerType,
           services: (document.getElementsByName('services')[0] as HTMLInputElement).value.split(',').map(service => service.trim()),
-          userId
+          userId,
         };
 
         // Log the provider data
         console.log('Submitting Provider Data:', providerData);
 
-        const response = await axios.post('/care/newprovider', providerData, { headers });
+        try {
+          const response = await axios.post('/care/newprovider', providerData, { headers });
 
-        // Log the response from the server
-        console.log('Provider Response:', response);
+          // Log the response from the server
+          console.log('Provider Response:', response);
 
-        const providerID = response.data.providerID;
-        setProviderId(providerID);
-        localStorage.setItem('providerID', providerID);
-        console.log(providerID);
+          const providerID = response.data.providerID;
+          setProviderId(providerID);
+          localStorage.setItem('providerID', providerID);
+          console.log(providerID);
 
-        if (providerType === 'Facility') {
-          setStep(2);
-        } else if (providerType === 'Doctor') {
-          setStep(3);
-        } else {
-          setStep(step + 1);
+          if (providerType === 'Facility') {
+            setStep(2);
+          } else if (providerType === 'Doctor') {
+            setStep(3);
+          } else {
+            setStep(step + 1);
+          }
+        } catch (error) {
+          if (axios.isAxiosError(error) && error.response) {
+            const errorMessage = error.response.data.message;
+            console.error('Backend error:', errorMessage);
+            setErrors([errorMessage]);
+          } else {
+            console.error('Error:', error);
+            setErrors(['An unexpected error occurred']);
+          }
         }
       } else {
         if (providerType === 'Facility' && step === 2) {
@@ -116,9 +154,7 @@ const RegistrationForm: React.FC = () => {
         }
       }
     } catch (error) {
-
       setError((error as Error).message);
-      
     }
   };
 
@@ -157,6 +193,17 @@ const RegistrationForm: React.FC = () => {
           specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
         };
 
+        const facilityErrors = validateFields([
+          { name: 'Facility photos', value: facilityData.facilityphotos },
+          { name: 'Insurance', value: facilityData.insurance },
+          { name: 'Specialties', value: facilityData.specialties },
+        ]);
+
+        if (facilityErrors.length > 0) {
+          setErrors(facilityErrors);
+          return;
+        }
+
         // Log the facility data
         console.log('Submitting Facility Data:', facilityData);
 
@@ -171,8 +218,22 @@ const RegistrationForm: React.FC = () => {
           specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
           conditionsTreated: (e.currentTarget.elements.namedItem('conditionsTreated') as HTMLInputElement).value,
           Procedureperformed: (e.currentTarget.elements.namedItem('Procedureperformed') as HTMLInputElement).value,
-          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value
+          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value,
         };
+
+        const doctorErrors = validateFields([
+          { name: 'Languages Spoken', value: doctorData.LanguagesSpoken },
+          { name: 'Gender', value: doctorData.Gender },
+          { name: 'Specialties', value: doctorData.specialties },
+          { name: 'Conditions Treated', value: doctorData.conditionsTreated },
+          { name: 'Procedures Performed', value: doctorData.Procedureperformed },
+          { name: 'Insurance', value: doctorData.insurance },
+        ]);
+
+        if (doctorErrors.length > 0) {
+          setErrors(doctorErrors);
+          return;
+        }
 
         // Log the doctor data
         console.log('Submitting Doctor Data:', doctorData);
@@ -190,7 +251,6 @@ const RegistrationForm: React.FC = () => {
       } else {
         setStep(step + 1);
       }
-
     } catch (error) {
       // Log the error response from the server
       console.error('Error submitting form:', error.response ? error.response.data : error.message);
@@ -205,7 +265,7 @@ const RegistrationForm: React.FC = () => {
           <p className={styles.Error}>Login is required to proceed.</p>
         </div>
       )}
-      
+
       {step === 1 && (
         <div className={styles.ProviderDetails}>
           <form className={styles.ProvidersForm} onSubmit={handleSubmit}>
@@ -232,7 +292,7 @@ const RegistrationForm: React.FC = () => {
           </form>
           {errors.length > 0 && (
             <div className={styles.ErrorContainer}>
-              <p className={styles.Error}>{errors[0]}</p>
+              <p className={styles.Error}>{errors.join(', ')}</p>
             </div>
           )}
         </div>
@@ -251,7 +311,7 @@ const RegistrationForm: React.FC = () => {
           </form>
           {errors.length > 0 && (
             <div className={styles.ErrorContainer}>
-              <p className={styles.Error}>{errors[0]}</p>
+              <p className={styles.Error}>{errors.join(', ')}</p>
             </div>
           )}
         </div>
@@ -277,7 +337,7 @@ const RegistrationForm: React.FC = () => {
           </form>
           {errors.length > 0 && (
             <div className={styles.ErrorContainer}>
-              <p className={styles.Error}>{errors[0]}</p>
+              <p className={styles.Error}>{errors.join(', ')}</p>
             </div>
           )}
         </div>
