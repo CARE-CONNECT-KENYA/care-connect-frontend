@@ -180,6 +180,7 @@ const ProviderDetail: React.FC = () => {
                   {provider.providerType === 'Facility' && <li><a href="#insurance">Insurance</a></li>}
                   {provider.providerType === 'Facility' && <li><a href="#specialties">Specialties</a></li>}
                 </ul>
+                <ReviewForm providerID={id}/>
               </div>
               <div className={styles.DetailContent}>
                 {provider.providerType === 'Doctor' && doctorDetails && (
@@ -246,7 +247,7 @@ const ProviderDetail: React.FC = () => {
               </div>
             </div>
             <ProviderReviews providerID={id}/>
-            <ReviewForm providerID={id}/>
+            
           </>
         )}
       </div>

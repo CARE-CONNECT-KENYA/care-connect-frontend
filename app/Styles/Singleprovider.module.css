@@ -164,4 +164,31 @@
     margin: 10px 0;
     border-radius: 5px;
   }
-  
+
+
+/* review Form  */
+
+.ratingContainer {
+  margin: 20px 0;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.ratingNumber {
+  width: 20px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.progressBar {
+  height: 20px;
+  background-color: #4caf50;
+  color: white;
+  text-align: right;
+  padding-right: 5px;
+  border-radius: 3px;
+}

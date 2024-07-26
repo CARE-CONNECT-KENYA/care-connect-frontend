@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import styles from '../Styles/Singleprovider.module.css';
+import RatingProgressBar from './RatingProgressBarProps';
 
 type Review = {
   id: number;
@@ -45,15 +46,20 @@ const ProviderReviews: React.FC<{ providerID: number }> = ({ providerID }) => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+  const ratings = reviews.map((review) => review.rating);
+
+    
 
   return (
     <div className={styles.reviewsContainer}>
       <h2>Provider Reviews</h2>
+       <RatingProgressBar  ratings={ratings} />
       {reviews.length > 0 ? (
         reviews.map((review) => (
           <div key={review.id} className={styles.review}>
             <p><strong>Rating:</strong> {review.rating}</p>
             <p><strong>Review:</strong> {review.text}</p>
+
           </div>
         ))
       ) : (
