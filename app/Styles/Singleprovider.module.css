@@ -166,7 +166,9 @@
   }
 
 
-/* review Form  */
+/* 
+rating progress bars Form 
+ */
 
 .ratingContainer {
   margin: 20px 0;
@@ -224,6 +226,11 @@ border-bottom: 1px solid #ccc ;
 .emptyBar {
   background-color: grey;
 }
+
+/* 
+Provider  reviews
+ */
+
 .reviewsContainer {
   /* your existing styles */
   background-color: white;
