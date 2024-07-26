@@ -1,47 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import styles from '../Styles/Singleprovider.module.css';
-import ProviderReviews from './ProviderReviews';
-import ReviewForm from './ReviewForm';
-
-
-// Define the types
-type Provider = {
-  bio: string;
-  email: string;
-  id: number;
-  location: string;
-  name: string;
-  number: number;
-  profileImage: string;
-  reg_date: string;
-  services: string[];
-  status: boolean;
-  user_id: number;
-  website: string;
-  workingHours: string;
-  providerType: string; // Added providerType
-  providerID: number;
-};
-
-type DoctorDetails = {
-  id: number;
-  gender: string;
-  specialties: string[];
-  languagesSpoken: string[];
-  conditionsTreated: string[];
-  procedurePerformed: string[];
-  insurance: string[];
-  providerId: number;
-};
-
-type FacilityDetails = {
-  id: number;
-  facilityphotos: string[];
-  insurance: string[];
-  specialties: string[];
-};
+import ProviderHeader from './ProviderDetails/ProviderHeader';
+import ProviderDetailsContent from './ProviderDetails/ProviderDetailsContent';
+import ProviderReviewsSection from './ProviderDetails/ProviderReviewsSection';
+import styles from '../Styles/Singleprovider.module.css'
 
 const ProviderDetail: React.FC = () => {
   const [provider, setProvider] = useState<Provider | null>(null);
@@ -123,139 +86,21 @@ const ProviderDetail: React.FC = () => {
     setShowFullBio(!showFullBio);
   };
 
-  const truncateBio = (bio: string) => {
-    const maxLength = 200;
-    if (bio.length > maxLength && !showFullBio) {
-      return bio.slice(0, maxLength) + '...';
-    }
-    return bio;
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
-      <div className={styles.SingleProviderHeader}>
-        <p>Header place something</p>
-      </div>
-      <div className={styles.SingleproviderConatiner}>
-        {provider && (
-          <>
-            <div className={styles.TopDetails}>
-              <div className={styles.TopLeft}>
-                <img src={provider.profileImage} alt={provider.name} />
-                <p>Working Hours: {provider.workingHours}</p>
-              </div>
-              <div className={styles.TopRight}>
-                <h1>{provider.name}</h1>
-                <div className={styles.ContacInfo}>
-                  <p className={styles.Phonenumber}>{provider.number}</p>
-                  <p><span>Email:</span> {provider.email}</p>
-                </div>
-                <div className={styles.ContacInfo}>
-                  <p><span>Location:</span> {provider.location}</p>
-                  <div></div>
-                </div>
-                <p className={styles.bio}>
-                  {truncateBio(provider.bio)}{' '}
-                  <span onClick={handleReadMoreToggle} className={styles.ReadMore}>
-                    {showFullBio ? 'Show less' : 'Read more'}
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.DetailSections}>
-              <div className={`${styles.DetailLinks} ${styles.Sticky}`}>
-                <ul>
-                  <li><a href="#services">Services</a></li>
-                  {provider.providerType === 'Doctor' && <li><a href="#gender">Gender</a></li>}
-                  {provider.providerType === 'Doctor' && <li><a href="#specialties">Specialties</a></li>}
-                  {provider.providerType === 'Doctor' && <li><a href="#languages">Languages Spoken</a></li>}
-                  {provider.providerType === 'Doctor' && <li><a href="#conditions">Conditions Treated</a></li>}
-                  {provider.providerType === 'Doctor' && <li><a href="#procedures">Procedures Performed</a></li>}
-                  {provider.providerType === 'Doctor' && <li><a href="#insurance">Insurance</a></li>}
-                  {provider.providerType === 'Facility' && <li><a href="#facilityphotos">Facility Photos</a></li>}
-                  {provider.providerType === 'Facility' && <li><a href="#insurance">Insurance</a></li>}
-                  {provider.providerType === 'Facility' && <li><a href="#specialties">Specialties</a></li>}
-                </ul>
-                <ReviewForm providerID={id}/>
-              </div>
-              <div className={styles.DetailContent}>
-                {provider.providerType === 'Doctor' && doctorDetails && (
-                  <>
-                    <div id="services" className={styles.DetailContentSection}>
-                      <h2>Services</h2>
-                      <p>{provider.services}</p>
-                    </div>
-                    {doctorDetails.map((doctor) => (
-                      <div key={doctor.id}>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="gender">Gender</h2>
-                          <p>{doctor.gender}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="specialties">Specialties</h2>
-                          <p>{doctor.specialties}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="conditions">Conditions Treated</h2>
-                          <p>{doctor.conditionsTreated}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="languages">Languages Spoken</h2>
-                          <p>{doctor.languagesSpoken}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="procedures">Procedures Performed</h2>
-                          <p>{doctor.procedurePerformed}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="insurance">Insurance</h2>
-                          <p>{doctor.insurance}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </>
-                )}
-
-                {provider.providerType === 'Facility' && facilityDetails && (
-                  <>
-                    <div id="services" className={styles.DetailContentSection}>
-                      <h2>Services</h2>
-                      <p>{provider.services}</p>
-                    </div>
-                    {facilityDetails.map((facility) => (
-                      <div key={facility.id}>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="facilityphotos">Facility Photos</h2>
-                          <p>{facility.facilityphotos}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="insurance">Insurance</h2>
-                          <p>{facility.insurance}</p>
-                        </div>
-                        <div className={styles.DetailContentSection}>
-                          <h2 id="specialties">Specialties</h2>
-                          <p>{facility.specialties}</p>
-                        </div>
-                      </div>
-                    ))}
-                    
-                  </>
-                    
-                )}
-                <ProviderReviews providerID={id}/>
-              </div>
-            </div>
-            
-            
-          </>
-        )}
-      </div>
-     
-    </>
+    <div className={styles.SingleproviderContainer}>
+      {provider && (
+        <>
+          <ProviderHeader provider={provider} showFullBio={showFullBio} onReadMoreToggle={handleReadMoreToggle} />
+          <div className={styles.DetailSections}>
+            <ProviderDetailsContent provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} />
+            <ProviderReviewsSection providerID={id} />
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
