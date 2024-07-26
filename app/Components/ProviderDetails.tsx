@@ -242,11 +242,14 @@ const ProviderDetail: React.FC = () => {
                         </div>
                       </div>
                     ))}
+                    
                   </>
+                    
                 )}
+                <ProviderReviews providerID={id}/>
               </div>
             </div>
-            <ProviderReviews providerID={id}/>
+            
             
           </>
         )}

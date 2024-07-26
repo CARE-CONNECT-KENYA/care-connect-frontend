@@ -8,6 +8,7 @@ type Review = {
   rating: number;
   text: string;
   providerID: number;
+  user: string;
 };
 
 const ProviderReviews: React.FC<{ providerID: number }> = ({ providerID }) => {
@@ -44,22 +45,42 @@ const ProviderReviews: React.FC<{ providerID: number }> = ({ providerID }) => {
     fetchReviews();
   }, [providerID]);
 
+  const renderStars = (rating: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span
+          key={i}
+          className={i <= rating ? styles.filledStar : styles.emptyStar}
+        >
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+  
   const ratings = reviews.map((review) => review.rating);
-
-    
 
   return (
     <div className={styles.reviewsContainer}>
       <h2>Provider Reviews</h2>
-       <RatingProgressBar  ratings={ratings} />
+      <RatingProgressBar ratings={ratings} />
       {reviews.length > 0 ? (
         reviews.map((review) => (
           <div key={review.id} className={styles.review}>
-            <p><strong>Rating:</strong> {review.rating}</p>
-            <p><strong>Review:</strong> {review.text}</p>
+            <div className={styles.nameOfreviewer}>
+              <div className={styles.userIcon}>
+                {review.user.charAt(0).toUpperCase()}
+              </div>
+              <p>{review.user}</p>
 
+            </div>
+            <p>{renderStars(review.rating)}</p>
+            <p> {review.text}</p>
           </div>
         ))
       ) : (

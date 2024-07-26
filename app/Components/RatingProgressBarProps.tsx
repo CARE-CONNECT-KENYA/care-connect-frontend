@@ -18,20 +18,37 @@ const RatingProgressBar: React.FC<RatingProgressBarProps> = ({ ratings }) => {
   });
 
   const maxCount = Math.max(...ratingCounts);
+  const averageRating = (ratings.reduce((sum, rating) => sum + rating, 0) / totalRatings).toFixed(1);
 
   return (
     <div className={styles.ratingContainer}>
-      {ratingCounts.map((count, index) => (
-        <div key={index} className={styles.ratingRow}>
-          <span className={styles.ratingNumber}>{5 - index}</span>
-          <div
-            className={styles.progressBar}
-            style={{ width: `${(count / maxCount) * 100}%` }}
-          >
-            {count}
-          </div>
-        </div>
-      ))}
+     
+    
+     <div className={styles.ratingbars}>
+            {ratingCounts.map((count, index) => (
+                <div key={index} >
+                    <div className={styles.ratingRow}> 
+                        <span className={styles.ratingNumber}>{5 - index}</span>
+                        <div
+                            className={`${styles.progressBar} ${count === 0 ? styles.emptyBar : ''}`}
+                            style={{ width: `${(count / maxCount) * 100}%` }}
+                            >
+                        {count}
+                        </div>
+                    </div>
+                </div>
+            ))}
+
+     </div>
+      
+       <div className={styles.avrgrating}>
+            <div>
+                
+                <h2>{averageRating}</h2>
+                <p>Avrage rating</p>
+                
+            </div>
+      </div>
     </div>
   );
 };
