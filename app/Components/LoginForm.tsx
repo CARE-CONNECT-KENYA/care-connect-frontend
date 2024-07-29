@@ -67,7 +67,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
               required
             />
             <span className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? 'show' : 'Hide'}
             </span>
           </div>
         </div>

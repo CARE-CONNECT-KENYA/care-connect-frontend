@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import styles from '../Styles/Users.module.css';
 
 // Define types for form data and error state
@@ -26,6 +26,7 @@ const SignUpForm: React.FC = () => {
   });
   const [error, setError] = useState<ErrorState>({});
   const [success, setSuccess] = useState<string>('');
+  const [showPassword, setShowPassword] = useState(false); // State for showing/hiding password
 
   // Handle form input change
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -102,14 +103,19 @@ const SignUpForm: React.FC = () => {
         {error.email && <p className={styles.error}>{error.email}</p>}
 
         <h6>Password</h6>
-        <input
-          type='password'
-          name='password'
-          placeholder='Enter password'
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+        <div className={styles.passwordContainer}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            name='password'
+            placeholder='Enter password'
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <span className={styles.eyeIcon} onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? 'Hide' : 'Show'}
+          </span>
+        </div>
         {error.password && <p className={styles.error}>{error.password}</p>}
 
         <button type='submit'>Sign Up</button>

@@ -9,7 +9,9 @@
     width: 90%;
 }
 
-
+.navigationOption{
+    text-align: center;
+}
 .SignupSidebar{
     display: grid;
     background-color: red;

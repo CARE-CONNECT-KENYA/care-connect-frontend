@@ -21,7 +21,7 @@ function Userlogin() {
         {/* Pass handleLoginSuccess as onSuccess prop */}
          <LoginForm onSuccess={handleLoginSuccess} />
           <div className={styles.navigationOption}>
-              <p> I have an account </p>
+              <p> I dont have an account </p>
               <Link href='/users/signup'> SIGN UP </Link>
             </div>
       </div>

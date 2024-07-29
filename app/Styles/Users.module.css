@@ -4,9 +4,7 @@
     background-color: black;
     width: 26%;
 }
-.formContainer{
-    margin-left: 70px;
-}
+
 .Signupform{
     display: grid;
     gap: 14px;
@@ -41,8 +39,9 @@
   
   .eyeIcon {
     position: absolute;
-    left: 55%;
+    left: 50%;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 0.4rempx;
+    border-bottom: #ccc solid 1px;
   }
   
