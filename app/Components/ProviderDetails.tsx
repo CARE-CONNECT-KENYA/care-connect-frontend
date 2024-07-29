@@ -4,7 +4,42 @@ import { usePathname } from 'next/navigation';
 import ProviderHeader from './ProviderDetails/ProviderHeader';
 import ProviderDetailsContent from './ProviderDetails/ProviderDetailsContent';
 import ProviderReviewsSection from './ProviderDetails/ProviderReviewsSection';
-import styles from '../Styles/Singleprovider.module.css'
+import styles from '../Styles/Singleprovider.module.css';
+
+type DoctorDetails = {
+  id: number | string;
+  gender: string;
+  specialties: string;
+  conditionsTreated: string;
+  languagesSpoken: string;
+  procedurePerformed: string;
+  insurance: string;
+};
+
+type FacilityDetails = {
+  id: number | string;
+  facilityphotos: string;
+  insurance: string;
+  specialties: string;
+};
+
+type Provider = {
+  bio: string;
+  email: string;
+  id: number;
+  location: string;
+  name: string;
+  number: number;
+  profileImage: string;
+  reg_date: string;
+  services: string[];
+  status: boolean;
+  user_id: number;
+  website: string;
+  workingHours: string;
+  providerType: string; // Added providerType
+  providerID: number;
+};
 
 const ProviderDetail: React.FC = () => {
   const [provider, setProvider] = useState<Provider | null>(null);
@@ -98,8 +133,7 @@ const ProviderDetail: React.FC = () => {
             <div className={styles.StickyNav}>
               <ProviderReviewsSection providerID={id} provider={provider} />
             </div>
-            <ProviderDetailsContent providerID={id} provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} />
-            
+            <ProviderDetailsContent providerID={id} provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} userID={provider.user_id.toString()} />
           </div>
         </>
       )}

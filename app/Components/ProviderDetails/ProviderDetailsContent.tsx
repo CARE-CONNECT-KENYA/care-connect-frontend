@@ -43,8 +43,9 @@ type ProviderDetailsContentProps = {
   provider: Provider;
   doctorDetails: DoctorDetails[] | null;
   facilityDetails: FacilityDetails[] | null;
-  providerID: number ;
-  userID: number;
+  providerID: number | string ;
+  userID: number | string;
+  
 
 };
 
