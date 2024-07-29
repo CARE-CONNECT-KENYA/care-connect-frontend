@@ -97,7 +97,6 @@ const ProviderDetail: React.FC = () => {
           <div className={styles.DetailSections}>
             <div className={styles.StickyNav}>
               <ProviderReviewsSection providerID={id} provider={provider} />
-
             </div>
             <ProviderDetailsContent providerID={id} provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} />
             

@@ -12,7 +12,7 @@ const ProviderReviewsSection: React.FC<ProviderReviewsSectionProps> = ({ provide
   
   return (
     <div className={styles.DetailLinks}>
-                      <ul>
+                <ul>
                   <li><a href="#services">Services</a></li>
                   {provider.providerType === 'Doctor' && <li><a href="#gender">Gender</a></li>}
                   {provider.providerType === 'Doctor' && <li><a href="#specialties">Specialties</a></li>}

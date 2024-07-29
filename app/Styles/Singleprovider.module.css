@@ -173,6 +173,7 @@
   top: 10px;
   position: sticky;
   z-index: 1000;
+  width: 20%;
   
 }
 /* Review form */
@@ -268,6 +269,27 @@ border-bottom: 1px solid #ccc ;
 /* 
 Provider  reviews
  */
+
+ .pagination {
+  display: flex;
+  justify-content: left;
+  margin-top: 1rem;
+}
+
+.pageButton {
+  margin: 0 0.25rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #ddd;
+  color: white;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.pageButton:disabled {
+  background-color: var(--primary-color);
+  cursor: default;
+}
 
 .reviewsContainer {
   /* your existing styles */
