@@ -2,6 +2,7 @@
 import React from 'react';
 import styles from '../../Styles/Singleprovider.module.css';
 import ProviderReviews from '../ProviderReviews';
+import ReviewForm from '../ReviewForm';
 
 type ProviderDetailsContentProps = {
   provider: Provider;
@@ -78,6 +79,10 @@ const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provide
         </>
       )}
       <ProviderReviews providerID={providerID} />
+      <div id="Review">
+      <ReviewForm providerID={providerID}  />
+      </div>
+      
 
       
     </div>

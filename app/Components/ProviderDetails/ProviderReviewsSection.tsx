@@ -1,7 +1,5 @@
 'use client'
 import React from 'react';
-import ProviderReviews from '../ProviderReviews';
-import ReviewForm from '../ReviewForm';
 import styles from '../../Styles/Singleprovider.module.css';
 
 type ProviderReviewsSectionProps = {
@@ -25,8 +23,9 @@ const ProviderReviewsSection: React.FC<ProviderReviewsSectionProps> = ({ provide
                   {provider.providerType === 'Facility' && <li><a href="#facilityphotos">Facility Photos</a></li>}
                   {provider.providerType === 'Facility' && <li><a href="#insurance">Insurance</a></li>}
                   {provider.providerType === 'Facility' && <li><a href="#specialties">Specialties</a></li>}
+                  <li><a href='#Review'>Write a Review</a></li>
                 </ul>
-      <ReviewForm providerID={providerID} />
+      
       
     </div>
   );

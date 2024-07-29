@@ -37,6 +37,18 @@ const ReviewForm: React.FC<{ providerID: number; userID: number }> = ({ provider
     }
   };
 
+  const renderStars = () => {
+    return [...Array(5)].map((_, index) => (
+      <span
+        key={index}
+        className={`${styles.star} ${rating > index ? styles.filled : ''}`}
+        onClick={() => setRating(index + 1)}
+      >
+        ★
+      </span>
+    ));
+  };
+
   return (
     <div className={styles.reviewFormContainer}>
       <h2>Add a Review</h2>
@@ -44,21 +56,14 @@ const ReviewForm: React.FC<{ providerID: number; userID: number }> = ({ provider
         {error && <p className={styles.error}>{error}</p>}
         {success && <p className={styles.success}>{success}</p>}
         <div className={styles.formGroup}>
-          <label htmlFor="rating">Rating</label>
-          <input
-            type="number"
-            id="rating"
-            value={rating}
-            onChange={(e) => setRating(parseInt(e.target.value, 10))}
-            min="1"
-            max="5"
-            required
-          />
+        
+          <div className={styles.starContainer}>{renderStars()}</div>
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="text">Review</label>
+          
           <textarea
             id="text"
+            placeholder='write a review'
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
