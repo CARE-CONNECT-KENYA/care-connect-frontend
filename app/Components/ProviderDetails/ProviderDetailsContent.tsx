@@ -4,11 +4,47 @@ import styles from '../../Styles/Singleprovider.module.css';
 import ProviderReviews from '../ProviderReviews';
 import ReviewForm from '../ReviewForm';
 
+type DoctorDetails = {
+  id: number | string;
+  gender: string;
+  specialties: string;
+  conditionsTreated: string;
+  languagesSpoken: string;
+  procedurePerformed: string;
+  insurance: string;
+};
+
+type FacilityDetails = {
+  id: number | string;
+  facilityphotos: string;
+  insurance: string;
+  specialties: string;
+};
+
+type Provider = {
+  bio: string;
+  email: string;
+  id: number;
+  location: string;
+  name: string;
+  number: number;
+  profileImage: string;
+  reg_date: string;
+  services: string[];
+  status: boolean;
+  user_id: number;
+  website: string;
+  workingHours: string;
+  providerType: string; // Added providerType
+  providerID: number;
+};
+
 type ProviderDetailsContentProps = {
   provider: Provider;
   doctorDetails: DoctorDetails[] | null;
   facilityDetails: FacilityDetails[] | null;
-  providerID: number | string;
+  providerID: number ;
+  userID: number;
 
 };
 
@@ -80,7 +116,7 @@ const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provide
       )}
       <ProviderReviews providerID={providerID} />
       <div id="Review">
-      <ReviewForm providerID={providerID}  />
+        <ReviewForm providerID={providerID}  />
       </div>
       
 

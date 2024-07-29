@@ -2,6 +2,24 @@
 import React from 'react';
 import styles from '../../Styles/Singleprovider.module.css'
 
+
+type Provider = {
+  bio: string;
+  email: string;
+  id: number;
+  location: string;
+  name: string;
+  number: number;
+  profileImage: string;
+  reg_date: string;
+  services: string[];
+  status: boolean;
+  user_id: number;
+  website: string;
+  workingHours: string;
+  providerType: string; // Added providerType
+  providerID: number;
+};
 type ProviderHeaderProps = {
   provider: Provider;
   showFullBio: boolean;

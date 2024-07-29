@@ -2,13 +2,16 @@
 import React from 'react';
 import styles from '../../Styles/Singleprovider.module.css';
 
-type ProviderReviewsSectionProps = {
-  provider: provider[] | null;
-  providerID: number | string;
 
+type Provider = {
+  providerType: string;
+}
+
+type ProviderReviewsSectionProps = {
+  provider: Provider | null;
 };
 
-const ProviderReviewsSection: React.FC<ProviderReviewsSectionProps> = ({ providerID, provider}) => {
+const ProviderReviewsSection: React.FC<ProviderReviewsSectionProps> = ({  provider}) => {
   
   return (
     <div className={styles.DetailLinks}>
