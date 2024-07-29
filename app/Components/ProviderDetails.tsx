@@ -95,8 +95,9 @@ const ProviderDetail: React.FC = () => {
         <>
           <ProviderHeader provider={provider} showFullBio={showFullBio} onReadMoreToggle={handleReadMoreToggle} />
           <div className={styles.DetailSections}>
+            <ProviderReviewsSection providerID={id} provider={provider} />
             <ProviderDetailsContent provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} />
-            <ProviderReviewsSection providerID={id} />
+            
           </div>
         </>
       )}
