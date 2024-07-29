@@ -1,18 +1,18 @@
 'use client'
 import React from 'react';
-import styles from '../../Styles/Singleprovider.module.css'
-
+import styles from '../../Styles/Singleprovider.module.css';
+import ProviderReviews from '../ProviderReviews';
 
 type ProviderDetailsContentProps = {
   provider: Provider;
   doctorDetails: DoctorDetails[] | null;
   facilityDetails: FacilityDetails[] | null;
- 
+  providerID: number | string;
+
 };
 
-const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provider, doctorDetails, facilityDetails }) => {
-
-
+const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provider, doctorDetails, facilityDetails, providerID}) => {
+  console.log("Provider ID:", providerID);
   return (
     <div className={styles.DetailContent}>
       {provider.providerType === 'Doctor' && doctorDetails && (
@@ -73,9 +73,13 @@ const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provide
                 <p>{facility.specialties}</p>
               </div>
             </div>
+            
           ))}
         </>
       )}
+      <ProviderReviews providerID={providerID} />
+
+      
     </div>
   );
 };

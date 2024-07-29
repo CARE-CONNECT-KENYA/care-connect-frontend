@@ -18,13 +18,18 @@ const ProviderHeader: React.FC<ProviderHeaderProps> = ({ provider, showFullBio, 
   };
 
   return (
+    <>
+    <div className={styles.SingleProviderHeader}>
+        <p>Header place something</p>
+      </div>
     <div className={styles.TopDetails}>
       <div className={styles.TopLeft}>
         <img src={provider.profileImage} alt={provider.name} />
-        <p>Working Hours: {provider.workingHours}</p>
+        
       </div>
       <div className={styles.TopRight}>
         <h1>{provider.name}</h1>
+        <p>Working Hours: {provider.workingHours}</p>
         <div className={styles.ContacInfo}>
           <p className={styles.Phonenumber}>{provider.number}</p>
           <p><span>Email:</span> {provider.email}</p>
@@ -40,6 +45,7 @@ const ProviderHeader: React.FC<ProviderHeaderProps> = ({ provider, showFullBio, 
         </p>
       </div>
     </div>
+    </>
   );
 };
 

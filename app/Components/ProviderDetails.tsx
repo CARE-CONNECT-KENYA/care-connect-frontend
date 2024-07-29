@@ -95,8 +95,11 @@ const ProviderDetail: React.FC = () => {
         <>
           <ProviderHeader provider={provider} showFullBio={showFullBio} onReadMoreToggle={handleReadMoreToggle} />
           <div className={styles.DetailSections}>
-            <ProviderReviewsSection providerID={id} provider={provider} />
-            <ProviderDetailsContent provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} />
+            <div className={styles.StickyNav}>
+              <ProviderReviewsSection providerID={id} provider={provider} />
+
+            </div>
+            <ProviderDetailsContent providerID={id} provider={provider} doctorDetails={doctorDetails} facilityDetails={facilityDetails} />
             
           </div>
         </>
