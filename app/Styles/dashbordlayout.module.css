@@ -7,6 +7,7 @@
     justify-content: space-between;
     background-color: white;
     border-bottom: 1px solid #ccc;
+    padding-bottom: 10px ;
 }
 .DashbordMainArea{
     padding: 10px;
