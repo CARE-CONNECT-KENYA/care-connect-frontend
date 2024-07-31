@@ -33,6 +33,7 @@ function ProviderAdminDetails() {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
+          
         });
 
         if (!response.ok) {

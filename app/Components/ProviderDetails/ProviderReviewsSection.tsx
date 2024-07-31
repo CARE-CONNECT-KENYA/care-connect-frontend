@@ -29,8 +29,7 @@ const ProviderReviewsSection: React.FC<ProviderReviewsSectionProps> = ({ provide
                   {provider.providerType === 'Facility' && <li><a href="#specialties">Specialties</a></li>}
                   <li><a href='#Review'>Write a Review</a></li>
                 </ul>
-      
-      
+  
     </div>
   );
 };

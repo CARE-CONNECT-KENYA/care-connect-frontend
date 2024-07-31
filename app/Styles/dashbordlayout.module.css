@@ -1,0 +1,25 @@
+.DashbordContainer{
+    background-color: #F8F9FA;
+  
+}
+.DashHeader{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    border-bottom: 1px solid #ccc;
+}
+
+.DashContainer{
+    display: flex;
+    justify-content: space-around;
+  
+}
+
+.DashbordSidebar{
+    height: 100vh;
+    border-right : solid 1px #ccc ;
+    padding: 30px;
+    display: grid;
+    background-color: white;
+    
+}
