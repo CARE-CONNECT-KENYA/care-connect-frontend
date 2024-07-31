@@ -1,0 +1,45 @@
+.ProviderProfile{
+    
+    background-color: white;
+    border-radius: 6px;
+    height: 90vh;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.ProviderProfile img{
+  object-fit: cover;
+  width: 100%;
+  height: 280px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.ProviderProfile span{
+    opacity: 50%;
+    letter-spacing: 1.14px;
+}
+
+.profileContent h2{
+    font-size: 1.2rem;
+    
+    color: var(--primary-color);
+}
+.profileContent{
+    padding: 5px;
+}
+
+.profileStart{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.profileContent p {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    
+  }

@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import styles from '../../Styles/admin.module.css'
 
 interface Provider {
   providerID: number;
@@ -13,7 +14,7 @@ interface Provider {
   profileImage: string;
   bio: string;
   website: string;
-  phoneNumber: string;
+  number: number;
 }
 
 function ProviderAdminDetails() {
@@ -55,16 +56,31 @@ function ProviderAdminDetails() {
       {error ? (
         <p>Error: {error}</p>
       ) : providerAdmin ? (
-        <div>
-          <h2>{providerAdmin.providerName}</h2>
-          <p>Location: {providerAdmin.location}</p>
-          <p>{providerAdmin.workingHours}</p>
-          <p>{providerAdmin.bio}</p>
-          <p>{providerAdmin.email}</p>
+        <div className={styles.ProviderProfile}>
+          <img src={providerAdmin.profileImage} />
+
+          <div className={styles.profileContent}>
+
+            <div className={styles.profileStart}>
+              <h2>{providerAdmin.providerName}</h2>
+              <h3><span >ID :</span>{providerAdmin.providerID}</h3>
+            </div>
+            
+            <p><span>Email </span> {providerAdmin.email}</p>
+            <p><span>Number</span> {providerAdmin.number}</p>
+            <p><span>Reg date </span> {providerAdmin.created_at}</p>
+            <p><span>Location</span> {providerAdmin.location}</p>
+            
+          </div>
+         
+
         </div>
+         
       ) : (
         <p>Loading...</p>
       )}
+
+
     </div>
   );
 }

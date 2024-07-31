@@ -8,10 +8,13 @@
     background-color: white;
     border-bottom: 1px solid #ccc;
 }
+.DashbordMainArea{
+    padding: 10px;
+}
 
 .DashContainer{
     display: flex;
-    justify-content: space-around;
+    gap: 20px;
   
 }
 
