@@ -3,6 +3,7 @@ import styles from '../../Styles/dashbordlayout.module.css';
 import Approveapplications from '../../Components/SuperadminComponents/Approveapplications'
 import TopBar from '../admin/TopBar';
 import SideBar from './SideBar';
+import Allusers from '../../Components/SuperadminComponents/Allusers';
 
 function SuperAdmin() {
 
@@ -12,7 +13,9 @@ function SuperAdmin() {
       <div className={styles.DashContainer}>
           <SideBar />
         <div className={styles.DashbordMainArea}>
+          <Allusers />
           <Approveapplications />
+          
         </div>
       </div>
     </div>
