@@ -9,6 +9,7 @@ type Provider = {
   id: number;
   location: string;
   name: string;
+  providerType: string;
   number: number;
   profileImage: string;
   reg_date: string;
@@ -38,7 +39,7 @@ const Approveapplications: React.FC = () => {
         }
 
         const data = await response.json();
-        setProviders(data); // Directly set the array to state
+        setProviders(data);
       } catch (error) {
         console.error('Error fetching providers:', error);
       }
@@ -47,7 +48,7 @@ const Approveapplications: React.FC = () => {
     fetchProviders();
   }, []);
 
-  const approveProvider = async (providerID: number) => {
+  const updateProviderStatus = async (providerID: number, status: boolean) => {
     try {
       const response = await fetch(`care/superadmin/aproveprovider/${providerID}`, {
         method: 'PUT',
@@ -55,40 +56,60 @@ const Approveapplications: React.FC = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
-        body: JSON.stringify({ status: true }), // Change status from false to true
+        body: JSON.stringify({ status }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to approve provider');
+        throw new Error('Failed to update provider status');
       }
 
-      // Update local providers list after approval
+      // Update local providers list after status change
       const updatedProviders = providers.map(provider =>
-        provider.id === providerID ? { ...provider, status: true } : provider
+        provider.id === providerID ? { ...provider, status } : provider
       );
       setProviders(updatedProviders);
     } catch (error) {
-      console.error('Error approving provider:', error);
+      console.error('Error updating provider status:', error);
     }
   };
 
   return (
     <div>
       <h1>Approve Applications</h1>
-      <div>
-        {providers.map(provider => (
-          <div key={provider.id} className={styles.CardContainer}>
-            <h2>{provider.name}</h2>
-            <p>Status: {provider.status ? 'Approved' : 'Pending'}</p>
-            <button
-              onClick={() => approveProvider(provider.id)}
-              disabled={provider.status} // Disable button if already approved
-            >
-              Approve
-            </button>
-          </div>
-        ))}
-      </div>
+      <table className={styles.Table}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Provider Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {providers.map(provider => (
+            <tr key={provider.id}>
+              <td>{provider.name}</td>
+              <td>{provider.email}</td>
+              <td>{provider.providerType}</td>
+              <td>{provider.status ? 'Approved' : 'Pending'}</td>
+              <td>
+                <select
+                  onChange={(e) => {
+                    const newStatus = e.target.value === 'approve';
+                    updateProviderStatus(provider.id, newStatus);
+                  }}
+                  value={provider.status ? 'approve' : 'suspend'}
+                  disabled={provider.status === undefined}
+                >
+                  <option value="approve">Approve</option>
+                  <option value="suspend">Suspend</option>
+                </select>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

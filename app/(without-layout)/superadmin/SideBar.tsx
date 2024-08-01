@@ -8,9 +8,8 @@ function SideBar() {
     <div className={styles.DashbordSidebar}>
           <ul>
             <li>Home</li>
-            <li>Settings</li>
-            <li>Admin</li>
-            <li>Calendar</li>
+            <li>Users</li>
+            <li>Providers</li>
           </ul>
         </div>
     </>

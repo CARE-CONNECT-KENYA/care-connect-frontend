@@ -6,6 +6,7 @@ type Users ={
     id: number;
     fullname: string;
     email: string;
+    role : string;
 
 };
 
@@ -46,7 +47,7 @@ function Allusers() {
         {users.map(users =>(
             <div key={users.id}>
                 <ul>
-                    <li>{users.fullname}</li>
+                    <li>{users.fullname} | {users.role} | {users.email}</li>
                 </ul>
 
             </div>
