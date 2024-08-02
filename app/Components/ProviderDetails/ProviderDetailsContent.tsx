@@ -7,18 +7,18 @@ import ReviewForm from '../ReviewForm';
 type DoctorDetails = {
   id: number | string;
   gender: string;
-  specialties: string;
-  conditionsTreated: string;
-  languagesSpoken: string;
-  procedurePerformed: string;
-  insurance: string;
+  specialties: string[];
+  conditionsTreated: string[];
+  languagesSpoken: string[];
+  procedurePerformed: string[];
+  insurance: string[];
 };
 
 type FacilityDetails = {
   id: number | string;
   facilityphotos: string;
-  insurance: string;
-  specialties: string;
+  insurance: string[];
+  specialties: string[];
 };
 
 type Provider = {
@@ -35,7 +35,7 @@ type Provider = {
   user_id: number;
   website: string;
   workingHours: string;
-  providerType: string; // Added providerType
+  providerType: string;
   providerID: number;
 };
 
@@ -43,21 +43,30 @@ type ProviderDetailsContentProps = {
   provider: Provider;
   doctorDetails: DoctorDetails[] | null;
   facilityDetails: FacilityDetails[] | null;
-  providerID: number | string ;
+  providerID: number | string;
   userID: number | string;
-  
-
 };
 
-const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provider, doctorDetails, facilityDetails, providerID}) => {
+const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provider, doctorDetails, facilityDetails, providerID }) => {
   console.log("Provider ID:", providerID);
+
+  const renderList = (items: string[]) => (
+    <div className="flex flex-wrap gap-2">
+      {items.map((item, index) => (
+        <div key={index} className="border border-[#cc] p-2 rounded-md flex items-center">
+          {item}
+        </div>
+      ))}
+    </div>
+  );
+  
   return (
     <div className={styles.DetailContent}>
       {provider.providerType === 'Doctor' && doctorDetails && (
         <>
           <div id="services" className={styles.DetailContentSection}>
             <h2>Services</h2>
-            <p>{provider.services}</p>
+            {renderList(provider.services)}
           </div>
           {doctorDetails.map((doctor) => (
             <div key={doctor.id}>
@@ -67,23 +76,23 @@ const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provide
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="specialties">Specialties</h2>
-                <p>{doctor.specialties}</p>
+                {renderList(doctor.specialties)}
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="conditions">Conditions Treated</h2>
-                <p>{doctor.conditionsTreated}</p>
+                {renderList(doctor.conditionsTreated)}
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="languages">Languages Spoken</h2>
-                <p>{doctor.languagesSpoken}</p>
+                {renderList(doctor.languagesSpoken)}
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="procedures">Procedures Performed</h2>
-                <p>{doctor.procedurePerformed}</p>
+                {renderList(doctor.procedurePerformed)}
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="insurance">Insurance</h2>
-                <p>{doctor.insurance}</p>
+                {renderList(doctor.insurance)}
               </div>
             </div>
           ))}
@@ -94,7 +103,7 @@ const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provide
         <>
           <div id="services" className={styles.DetailContentSection}>
             <h2>Services</h2>
-            <p>{provider.services}</p>
+            <p>{provider.services.join(', ')}</p>
           </div>
           {facilityDetails.map((facility) => (
             <div key={facility.id}>
@@ -104,24 +113,20 @@ const ProviderDetailsContent: React.FC<ProviderDetailsContentProps> = ({ provide
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="insurance">Insurance</h2>
-                <p>{facility.insurance}</p>
+                {renderList(facility.insurance)}
               </div>
               <div className={styles.DetailContentSection}>
                 <h2 id="specialties">Specialties</h2>
-                <p>{facility.specialties}</p>
+                {renderList(facility.specialties)}
               </div>
             </div>
-            
           ))}
         </>
       )}
       <ProviderReviews providerID={providerID} />
       <div id="Review">
-        <ReviewForm providerID={providerID}  />
+        <ReviewForm providerID={providerID} />
       </div>
-      
-
-      
     </div>
   );
 };
