@@ -14,13 +14,6 @@ function DoctorsList() {
       <div className={styles.listingsContainer}>
           <div>
             <ProvidersCard />
-          </div>
-          <div>
-            <div>
-              <h2>
-                Side bar
-              </h2>
-            </div>
           </div>  
       </div>
     </div> 
