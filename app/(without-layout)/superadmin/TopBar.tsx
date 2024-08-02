@@ -24,6 +24,9 @@ function TopBar() {
     const handleLogout = () => {
       localStorage.removeItem('fullname');
       localStorage.removeItem('role');
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      localStorage.removeItem('providerID');
       window.location.href = '/users/login'; // Redirect to login page after logout
     };
   
