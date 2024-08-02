@@ -1,7 +1,8 @@
 import React from 'react'
 
 import styles from '../../Styles/listings.module.css'
-import ProvidersCard from '../../Components/ProvidersCard'
+import ProviderDoctorListings from '../../Components/Listings/ProviderDoctorListing'
+
 
 function DoctorsList() {
   return (
@@ -13,7 +14,7 @@ function DoctorsList() {
 
       <div className={styles.listingsContainer}>
           <div>
-            <ProvidersCard />
+            <ProviderDoctorListings />
           </div>  
       </div>
     </div> 
