@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../Styles/ProviderCard.module.css';
+import styles from '../../Styles/ProviderCard.module.css';
 
 type Facility = {
   bio: string;
@@ -35,7 +35,7 @@ function ProviderFacilityListing() {
       }
 
       try {
-        const response = await fetch('care/provider/facilities', {
+        const response = await fetch('care/provider/facility', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

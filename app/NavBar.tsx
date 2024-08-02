@@ -37,8 +37,7 @@ function NavBar() {
     const links = [
         { label: "HOME", href: "/" },
         { label: "DOCTORS", href: "/doctors" },
-        { label: "FACILITIES", href: "/" },
-        { label: "CATEGORIES", href: "/" },
+        { label: "FACILITIES", href: "/facilities" },
         { label: "REGISTER", href: "/register" }
     ];
 
