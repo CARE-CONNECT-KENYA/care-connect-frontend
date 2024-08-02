@@ -2,9 +2,9 @@
     border : solid 1px #ccc;
     display: flex;
     gap: 20px;
-    border-radius: 6px;
+    border-radius: 2px;
     margin-bottom: 20px;
-    width: 80%;
+    width: 70%;
 }
 
 .CardContainer h4{
@@ -21,10 +21,10 @@
 
 .contentArea{
     display: grid;
-   /* margin-top: 10px; */
-   /* max-width: 50%; */
-   
    align-content: space-evenly;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   
 }
 .contentArea h1{
     font-size: 1.3rem;
@@ -35,7 +35,7 @@
 .CardContainer img{
     object-fit: cover;
     width: 350px;
-    height: 250px;
+    height: 220px;
 }
 
 .callToAction button {

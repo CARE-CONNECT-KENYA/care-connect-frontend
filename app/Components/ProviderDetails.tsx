@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import ProviderHeader from './ProviderDetails/ProviderHeader';
 import ProviderDetailsContent from './ProviderDetails/ProviderDetailsContent';
 import ProviderReviewsSection from './ProviderDetails/ProviderReviewsSection';
@@ -48,19 +49,28 @@ const ProviderDetail: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showFullBio, setShowFullBio] = useState(false);
+  const router = useRouter();
+
 
   const pathname = usePathname();
   const id = pathname?.split('/').pop();
 
   useEffect(() => {
     const fetchProvider = async () => {
+      const token = localStorage.getItem('access_token');
+
+      if (!token) {
+        router.push('/users/signup');
+        return;
+      }
+
       if (id) {
         try {
           const response = await fetch(`/care/provider/${id}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+              Authorization: `Bearer ${token}`,
             },
           });
 
