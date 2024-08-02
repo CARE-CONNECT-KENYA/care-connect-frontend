@@ -1,5 +1,4 @@
 'use client'
-// components/RegistrationForm.tsx
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import ProviderRegistration from './ProviderRegistration';
@@ -16,10 +15,10 @@ const RegistrationForm: React.FC = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const validateFields = (fields: { name: string; value: string }[]): string[] => {
+  const validateFields = (fields: { name: string; value: string }[], optionalFields: string[] = []): string[] => {
     const fieldErrors: string[] = [];
     fields.forEach((field) => {
-      if (!field.value.trim()) {
+      if (!optionalFields.includes(field.name) && !field.value.trim()) {
         fieldErrors.push(`${field.name} should not be empty`);
       }
     });
@@ -40,12 +39,11 @@ const RegistrationForm: React.FC = () => {
       { name: 'Phone number', value: (document.getElementsByName('phoneNumber')[0] as HTMLInputElement).value },
       { name: 'Bio', value: (document.getElementsByName('bio')[0] as HTMLTextAreaElement).value },
       { name: 'Location', value: (document.getElementsByName('location')[0] as HTMLInputElement).value },
-      { name: 'Website', value: (document.getElementsByName('website')[0] as HTMLInputElement).value },
       { name: 'Working hours', value: (document.getElementsByName('workingHours')[0] as HTMLInputElement).value },
       { name: 'Provider type', value: providerType },
     ];
 
-    const fieldErrors = validateFields(commonFields);
+    const fieldErrors = validateFields(commonFields, ['Website']); // Website is now optional
     if (fieldErrors.length > 0) {
       setErrors(fieldErrors);
       return;
@@ -78,7 +76,7 @@ const RegistrationForm: React.FC = () => {
           phoneNumber: (document.getElementsByName('phoneNumber')[0] as HTMLInputElement).value,
           workingHours: (document.getElementsByName('workingHours')[0] as HTMLInputElement).value,
           profileImage: imageUrl,
-          website: (document.getElementsByName('website')[0] as HTMLInputElement).value,
+          website: (document.getElementsByName('website')[0] as HTMLInputElement).value || '', // Default to empty string if not provided
           location: (document.getElementsByName('location')[0] as HTMLInputElement).value,
           providerType,
           services: (document.getElementsByName('services')[0] as HTMLInputElement).value.split(',').map(service => service.trim()),
@@ -152,14 +150,14 @@ const RegistrationForm: React.FC = () => {
         const facilityData = {
           providerID: providerID!,
           facilityphotos: (e.currentTarget.elements.namedItem('facilityPhotos') as HTMLInputElement).value,
-          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value,
-          specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
+          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value.split(',').map(item => item.trim()),
+          specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value.split(',').map(item => item.trim()),
         };
 
         const facilityErrors = validateFields([
           { name: 'Facility photos', value: facilityData.facilityphotos },
-          { name: 'Insurance', value: facilityData.insurance },
-          { name: 'Specialties', value: facilityData.specialties },
+          { name: 'Insurance', value: facilityData.insurance.join(', ') },
+          { name: 'Specialties', value: facilityData.specialties.join(', ') },
         ]);
 
         if (facilityErrors.length > 0) {
@@ -171,21 +169,21 @@ const RegistrationForm: React.FC = () => {
       } else if (step === 3 && providerType === 'Doctor') {
         const doctorData = {
           providerID: providerID!,
-          LanguagesSpoken: (e.currentTarget.elements.namedItem('LanguagesSpoken') as HTMLInputElement).value,
+          LanguagesSpoken: (e.currentTarget.elements.namedItem('LanguagesSpoken') as HTMLInputElement).value.split(',').map(item => item.trim()),
           Gender: (e.currentTarget.elements.namedItem('Gender') as HTMLSelectElement).value,
-          specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value,
-          conditionsTreated: (e.currentTarget.elements.namedItem('conditionsTreated') as HTMLInputElement).value,
-          Procedureperformed: (e.currentTarget.elements.namedItem('Procedureperformed') as HTMLInputElement).value,
-          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value,
+          specialties: (e.currentTarget.elements.namedItem('specialties') as HTMLInputElement).value.split(',').map(item => item.trim()),
+          conditionsTreated: (e.currentTarget.elements.namedItem('conditionsTreated') as HTMLInputElement).value.split(',').map(item => item.trim()),
+          Procedureperformed: (e.currentTarget.elements.namedItem('Procedureperformed') as HTMLInputElement).value.split(',').map(item => item.trim()),
+          insurance: (e.currentTarget.elements.namedItem('insurance') as HTMLInputElement).value.split(',').map(item => item.trim()),
         };
 
         const doctorErrors = validateFields([
-          { name: 'Languages Spoken', value: doctorData.LanguagesSpoken },
+          { name: 'Languages Spoken', value: doctorData.LanguagesSpoken.join(', ') },
           { name: 'Gender', value: doctorData.Gender },
-          { name: 'Specialties', value: doctorData.specialties },
-          { name: 'Conditions Treated', value: doctorData.conditionsTreated },
-          { name: 'Procedures Performed', value: doctorData.Procedureperformed },
-          { name: 'Insurance', value: doctorData.insurance },
+          { name: 'Specialties', value: doctorData.specialties.join(', ') },
+          { name: 'Conditions Treated', value: doctorData.conditionsTreated.join(', ') },
+          { name: 'Procedures Performed', value: doctorData.Procedureperformed.join(', ') },
+          { name: 'Insurance', value: doctorData.insurance.join(', ') },
         ]);
 
         if (doctorErrors.length > 0) {

@@ -5,12 +5,12 @@ import styles from '../../Styles/RegistartionForm.module.css';
 
 interface DoctorData {
   providerID: string;
-  LanguagesSpoken: string;
+  LanguagesSpoken: string[];
   Gender: string;
-  specialties: string;
-  conditionsTreated: string;
-  Procedureperformed: string;
-  insurance: string;
+  specialties: string[];
+  conditionsTreated: string[];
+  Procedureperformed: string[];
+  insurance: string[];
 }
 
 interface Props {

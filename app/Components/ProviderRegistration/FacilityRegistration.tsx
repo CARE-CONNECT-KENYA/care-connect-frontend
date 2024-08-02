@@ -6,8 +6,8 @@ import styles from '../../Styles/RegistartionForm.module.css';
 interface FacilityData {
   providerID: string;
   facilityphotos: string;
-  insurance: string;
-  specialties: string;
+  insurance: string[];
+  specialties: string[];
 }
 
 interface Props {
