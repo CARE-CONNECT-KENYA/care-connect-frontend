@@ -9,17 +9,19 @@ type Provider = {
   reg_date: string;
   email: string;
   location: string;
-  phoneNumber: string; 
+  phoneNumber: string;
   id: number;
   name: string;
   services: string[];
-  providerType:string;
-  profileImage:string;
+  providerType: string;
+  profileImage: string;
   rating: number | null;
 };
 
 function FeaturedProviders() {
   const [providers, setProviders] = useState<Provider[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -28,11 +30,13 @@ function FeaturedProviders() {
 
       if (!token) {
         console.error('No access token found');
+        setError('No access token found');
+        setLoading(false);
         return;
       }
 
       try {
-        const response = await fetch('care/providers', {
+        const response = await fetch('/care/providers', { // Adjust the endpoint if necessary
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -45,9 +49,12 @@ function FeaturedProviders() {
         }
 
         const data = await response.json();
-        setProviders(data.providerlist); // Assuming `providerlist` is always present
+        setProviders(data.providerlist); // Ensure `providerlist` exists in response
       } catch (error) {
         console.error('Error fetching providers:', error);
+        setError('Error fetching providers');
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -63,7 +70,8 @@ function FeaturedProviders() {
       return <p>No rating</p>;
     }
 
-    const stars = [];
+    const stars: JSX.Element[] = []; // Explicitly type the array
+
     for (let i = 0; i < 5; i++) {
       stars.push(
         <span key={i} className={i < rating ? styles.filledStar : styles.emptyStar}>
@@ -74,6 +82,9 @@ function FeaturedProviders() {
 
     return stars;
   };
+
+  if (loading) return <p>Loading providers...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className={styles.FeaturedCardContainer}>
