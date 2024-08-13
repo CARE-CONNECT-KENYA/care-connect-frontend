@@ -1,0 +1,25 @@
+
+.sidebar h4{
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing:  1.14px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+}
+.ServicesList{
+    display: grid;
+    gap: 5px;
+
+}
+.RatingDPD{
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+.clearFiltersButton{
+    color: blue;
+    opacity: 50%;
+}

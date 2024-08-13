@@ -67,8 +67,8 @@ function ProviderDoctorListing() {
     if (rating === null) {
       return <p>No rating</p>;
     }
-
-    const stars = [];
+  
+    const stars: JSX.Element[] = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
         <span key={i} className={i < rating ? styles.filledStar : styles.emptyStar}>
@@ -115,15 +115,15 @@ function ProviderDoctorListing() {
   return (
     <div className={styles.ListingsContainer}>
         <div className={styles.providerDoctorListing}>
-        <Filters
-          genderFilter={genderFilter}
-          setGenderFilter={setGenderFilter}
-          ratingRangeFilter={ratingRangeFilter}
-          setRatingRangeFilter={setRatingRangeFilter}
-          servicesFilter={servicesFilter}
-          setServicesFilter={setServicesFilter}
-          handleClearFilters={handleClearFilters}
-        />
+        <div className={styles.ListSidebar}>
+          <Filters
+            ratingRangeFilter={ratingRangeFilter}
+            setRatingRangeFilter={setRatingRangeFilter}
+            servicesFilter={servicesFilter}
+            setServicesFilter={setServicesFilter}
+            handleClearFilters={handleClearFilters}
+          />
+        </div>
         
         <div className={styles.listingArea}>
           {currentDoctors.map((doctor) => (

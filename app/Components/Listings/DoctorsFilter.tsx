@@ -2,8 +2,7 @@ import React from 'react';
 import styles from '../../Styles/Filters.module.css';
 
 type FiltersProps = {
-  genderFilter: string | null;
-  setGenderFilter: React.Dispatch<React.SetStateAction<string | null>>;
+  
   ratingRangeFilter: [number, number] | null;
   setRatingRangeFilter: React.Dispatch<React.SetStateAction<[number, number] | null>>;
   servicesFilter: string[];
@@ -12,8 +11,6 @@ type FiltersProps = {
 };
 
 const Filters: React.FC<FiltersProps> = ({
-  genderFilter,
-  setGenderFilter,
   ratingRangeFilter,
   setRatingRangeFilter,
   servicesFilter,
@@ -22,36 +19,11 @@ const Filters: React.FC<FiltersProps> = ({
 }) => {
   return (
     <aside className={styles.sidebar}>
-      <h3>Filters</h3>
+      <h3>I am Looking For ?</h3>
+      
       <div>
-        <h4>Gender</h4>
-        <label>
-          <input
-            type="checkbox"
-            checked={genderFilter === 'Male'}
-            onChange={() => setGenderFilter(genderFilter === 'Male' ? null : 'Male')}
-          />
-          Male
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={genderFilter === 'Female'}
-            onChange={() => setGenderFilter(genderFilter === 'Female' ? null : 'Female')}
-          />
-          Female
-        </label>
-      </div>
-      <div>
-        <h4>Rating</h4>
-        <select onChange={(e) => setRatingRangeFilter(e.target.value === '1-3' ? [1, 3] : [3, 5])}>
-          <option value="">Select Rating</option>
-          <option value="1-3">1-3</option>
-          <option value="3-5">3-5</option>
-        </select>
-      </div>
-      <div>
-        <h4>Services</h4>
+        <h4>Popular Services</h4>
+        <div className={styles.ServicesList}>
         <label>
           <input
             type="checkbox"
@@ -74,7 +46,7 @@ const Filters: React.FC<FiltersProps> = ({
                 : [...servicesFilter, 'Pediatrician']
             )}
           />
-          Pediatrician
+            Pediatrician
         </label>
         <label>
           <input
@@ -88,6 +60,15 @@ const Filters: React.FC<FiltersProps> = ({
           />
           Neurologist
         </label>
+        </div>
+      </div>
+      <div>
+        <h4>Rating</h4>
+        <select className={styles.RatingDPD}onChange={(e) => setRatingRangeFilter(e.target.value === '1-3' ? [1, 3] : [3, 5])}>
+          <option value="">Select Rating</option>
+          <option value="1-3">1-3</option>
+          <option value="3-5">3-5</option>
+        </select>
       </div>
       <button className={styles.clearFiltersButton} onClick={handleClearFilters}>
         Clear Filters
