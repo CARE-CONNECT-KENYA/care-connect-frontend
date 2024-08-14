@@ -1,4 +1,4 @@
-import HomeCategories from "./Components/HomeCategories";
+
 import HomeFaeturedlist from "./Components/HomeFaeturedlist";
 import HomeHeader from "./Components/HomeHeader";
 import HomeRegister from "./Components/HomeRegister";
@@ -19,10 +19,6 @@ export default function Home() {
             <HomeHeader  />
           </div>
           
-          <div className="mb-14">
-            <HomeCategories />
-          </div>
-
           <div className="mb-14">
             <HomeFaeturedlist  />
           </div>
