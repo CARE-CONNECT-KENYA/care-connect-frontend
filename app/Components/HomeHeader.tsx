@@ -4,6 +4,7 @@ import HomepageCategories from './HomepageCategories'
 import SearchBar from './SearchBar'
 
 
+
 function HomeHeader() {
   return (
     <div className={styles.header}>
@@ -11,8 +12,9 @@ function HomeHeader() {
         <p>You deserve access to quality Health care</p>
         <h1>Find the right Doctor or Hospital</h1>
       </div>
-      <SearchBar />
+      
       <HomepageCategories />
+      <SearchBar />
       
     </div>
   )

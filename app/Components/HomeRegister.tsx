@@ -1,12 +1,19 @@
 import React from 'react'
 import styles from "../Styles/HomePage.module.css"
 import Link from 'next/link'
+import Image from 'next/image'
 
 function HomeRegister() {
   return (
     <div className={styles.registertext}>
         <div>
-            <img src='/images/reg-calltoation.png'  alt='registration-care-connect-cat'/>
+            <Image 
+                src='/images/registerfacility.png'
+                alt='registration-care-connect-cat'
+                width={700}
+                height={700}
+            />
+            
         </div>
 
         <div className={styles.description} >
@@ -17,8 +24,7 @@ function HomeRegister() {
             </div>
             
             <div className=' flex gap-3 mt-10'>
-                <Link className={styles.facilitybtn} href="/" ><button>Register Facility</button></Link>
-                <Link className={styles.doctorbtn}  href="/"><button>Register As a Doctor</button></Link>
+                <Link className={styles.facilitybtn} href="/register" ><button>Get Started Here</button></Link>
             </div>
 
         </div>

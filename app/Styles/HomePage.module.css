@@ -84,7 +84,8 @@
 
 .registertext h1{
     font-size: 2.8rem; 
-}
+    color: white;
+} 
 
 .registertext{
     display: grid;
@@ -95,7 +96,9 @@
     width: 100%;
     margin: auto;
     background-color: var(--primary-color);
+    border-radius: 6px ;
 }
+
 .facilitybtn{
     border: 1px solid #ccc ;
     border-radius: 3px;
