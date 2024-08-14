@@ -1,24 +1,23 @@
 /* This is the header section */
 
 .header{
-    background-image: url(/images/care-connect-hero-image.jpg);
-    height: 500px;
+    
+    height: 600px;
     margin-top: 0px;
     text-align: center;
     border-radius: 6px;
     place-items: center;
+   border: 1px solid #ccc;
     
 }
+
 .HeaderText{
     padding-top: 60px;
 }
 
-.HeaderText p{
-    color: #ffffff;
-    
-}
+
 .HeaderText h1{
-    color: #ffffff;
+    
     font-size: 2.8rem;
     
 }
@@ -41,6 +40,11 @@
     text-align: left;
     font-size: 1.9rem;
 }
+.DocCategory a{
+    text-align: left;
+    text-decoration: underline;
+
+}
 .HosCategory{
     background-color: var(--primary-color);
     padding: 30px;
@@ -57,7 +61,7 @@
 }
 .HosCategory a{
     text-align: left;
-    border-bottom: 1px solid #ccc ;
+    text-decoration: underline;
 }
 
 
@@ -88,8 +92,9 @@
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 100%;
     margin: auto;
+    background-color: var(--primary-color);
 }
 .facilitybtn{
     border: 1px solid #ccc ;
@@ -108,39 +113,7 @@
 
 }
 
-/* Section with search area */
-.searchContainer{
-    background-color: var(--primary-color);
-    padding: 50px;
-    border-radius: 3px;
 
-}
-.searchContainer input{
-    width: 100%;
-    padding: 15px;
-    border-radius: 3px;
-}
-.searchContainer p{
-    color: #ffffff;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.sercContent{
-    display: grid;
-    place-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    margin: auto;
-
-}
-.searchContainer h1{
-    color: #ffffff;
-    font-size: 2.8rem;
-
-}
 
 /* Media query for mobile screens */
 @media (max-width: 768px) {

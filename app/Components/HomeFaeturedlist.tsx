@@ -8,7 +8,7 @@ function HomeFaeturedlist() {
         <div className={styles.featuredList}>
 
           <h1>
-            <span >Top Health</span> Service Providers
+            <span >Featured</span> Service Providers
           </h1>
 
         </div>
