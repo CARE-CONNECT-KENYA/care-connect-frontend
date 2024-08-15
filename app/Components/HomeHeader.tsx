@@ -12,9 +12,9 @@ function HomeHeader() {
         <p>You deserve access to quality Health care</p>
         <h1>Find the right Doctor or Hospital</h1>
       </div>
-      
-      <HomepageCategories />
       <SearchBar />
+      <HomepageCategories />
+      
       
     </div>
   )

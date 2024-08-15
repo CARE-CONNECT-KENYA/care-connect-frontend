@@ -10,8 +10,8 @@ function HomeRegister() {
             <Image 
                 src='/images/registerfacility.png'
                 alt='registration-care-connect-cat'
-                width={700}
-                height={700}
+                width={550}
+                height={500}
             />
             
         </div>
@@ -19,7 +19,7 @@ function HomeRegister() {
         <div className={styles.description} >
             <div>
                 <h1>
-                Do you offer Quality <br></br>Reliable & Top-class <br></br>healthcare services.
+                Would you like to be <br></br>featured as a <br></br>health provider ?
                 </h1>
             </div>
             

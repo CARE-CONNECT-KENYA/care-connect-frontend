@@ -14,16 +14,19 @@ function SearchBar() {
   };
 
   return (
-    <>
+   
+      <div className={styles.SeachContainer}>
       <input
-        className={styles.SearchInput}
-        type="text"
-        placeholder="Search For Doctor"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-    </>
+          className={styles.SearchInput}
+          type="text"
+          placeholder=" Location, condition or Specialty"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className={styles.SeachButton} onClick={handleSearch}>Search</button>
+      </div>
+      
+    
   );
 }
 
