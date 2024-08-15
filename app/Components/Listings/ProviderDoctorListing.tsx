@@ -25,7 +25,7 @@ const ITEMS_PER_PAGE = 9;
 function ProviderDoctorListing() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [genderFilter, setGenderFilter] = useState<string | null>(null);
+  const [genderFilter, setGenderFilter] = useState<string[]>([]);
   const [ratingRangeFilter, setRatingRangeFilter] = useState<[number, number] | null>(null);
   const [servicesFilter, setServicesFilter] = useState<string[]>([]);
 
@@ -92,14 +92,14 @@ function ProviderDoctorListing() {
   };
 
   const applyFilters = (doctor: Doctor) => {
-    if (genderFilter && doctor.gender !== genderFilter) return false;
+    if (genderFilter.length > 0 && !genderFilter.includes(doctor.gender)) return false;
     if (ratingRangeFilter && (doctor.rating === null || doctor.rating < ratingRangeFilter[0] || doctor.rating > ratingRangeFilter[1])) return false;
     if (servicesFilter.length > 0 && !servicesFilter.some(service => doctor.services.includes(service))) return false;
     return true;
   };
 
   const handleClearFilters = () => {
-    setGenderFilter(null);
+    setGenderFilter([]);
     setRatingRangeFilter(null);
     setServicesFilter([]);
     setCurrentPage(1); // Reset to first page after clearing filters
@@ -114,13 +114,15 @@ function ProviderDoctorListing() {
 
   return (
     <div className={styles.ListingsContainer}>
-        <div className={styles.providerDoctorListing}>
+      <div className={styles.providerDoctorListing}>
         <div className={styles.ListSidebar}>
           <Filters
             ratingRangeFilter={ratingRangeFilter}
             setRatingRangeFilter={setRatingRangeFilter}
             servicesFilter={servicesFilter}
             setServicesFilter={setServicesFilter}
+            genderFilter={genderFilter}
+            setGenderFilter={setGenderFilter}
             handleClearFilters={handleClearFilters}
           />
         </div>
@@ -135,7 +137,7 @@ function ProviderDoctorListing() {
               <div className={styles.contentArea}>
                 <h1>{doctor.name}</h1>
                 <div className={styles.stars}>{renderStars(doctor.rating)}</div>
-                <p><span>Specialties:</span> {doctor.services.join(' | ')}</p>
+                <p><span>Specialties : </span> {doctor.services.join(' | ')}</p>
                 <p>{truncateBio(doctor.bio)}</p>
                 <div className={styles.callToAction}>
                   <button type='button' onClick={() => handleKnowMoreClick(doctor.id)}>Know More</button>

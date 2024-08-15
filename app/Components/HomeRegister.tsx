@@ -11,7 +11,7 @@ function HomeRegister() {
                 src='/images/registerfacility.png'
                 alt='registration-care-connect-cat'
                 width={550}
-                height={500}
+                height={350}
             />
             
         </div>
