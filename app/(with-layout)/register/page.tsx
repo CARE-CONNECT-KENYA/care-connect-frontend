@@ -1,31 +1,23 @@
 import React from 'react'
 import styles from '../../Styles/RegistartionForm.module.css'
 import RegistrationForm from '../../Components/ProviderRegistration/RegistrationForm'
+import Benefits from '../../Components/Registarion/Benefits'
+import RegistrationHeader from '../../Components/Registarion/RegistrationHeader'
 
 
 
 
 function page() {
   return (
+    <>
+    <RegistrationHeader />
     <div className={styles.RegistartionConatiner}>
         <div className={styles.item}>
           <RegistrationForm />
         </div>
-        <div className={styles.item}>
-            <h1>Benefits of registration</h1>
-            <div>
-              <ul>
-                <li>Increased Visibility and Reach</li>
-                <li>Enhanced liatient Trust and Engagement</li>
-                <li> Streamlined Aliliointment Management</li>
-                <li>Comprehensive Marketing Tools</li>
-              </ul>
-
-            </div>
-            
-        </div>
-      
-    </div>
+        <Benefits />
+      </div>
+    </>
   )
 }
 
