@@ -37,7 +37,7 @@ function NavBar() {
     const links = [
         { label: "HOME", href: "/" },
         { label: "DOCTORS", href: "/doctors" },
-        { label: "FACILITIES", href: "/facilities" },
+        { label: "HOSPITALS", href: "/facilities" },
         { label: "REGISTER", href: "/register" }
     ];
 
@@ -99,7 +99,8 @@ function NavBar() {
                 ) : (
                     <>
                         <Link href="/users/login">LOGIN</Link>
-                        <Link href="/users/signup">SIGN UP</Link>
+                        <Link href="/users/signup" className="bg-blue-500 text-white rounded-lg px-3 py-2">Get Started</Link>
+
                     </>
                 )}
             </div>
