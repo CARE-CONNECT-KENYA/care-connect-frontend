@@ -18,7 +18,7 @@ const FacilityFilters: React.FC<FacilityFiltersProps> = ({
 }) => {
   return (
     <aside className={styles.sidebar}>
-      <h3>I am Looking For?</h3>
+      <h3>I am looking for?</h3>
 
       {/* Popular Services Filter */}
       <div>

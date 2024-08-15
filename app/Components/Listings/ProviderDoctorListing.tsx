@@ -28,6 +28,7 @@ function ProviderDoctorListing() {
   const [genderFilter, setGenderFilter] = useState<string[]>([]);
   const [ratingRangeFilter, setRatingRangeFilter] = useState<[number, number] | null>(null);
   const [servicesFilter, setServicesFilter] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const router = useRouter();
 
@@ -95,6 +96,7 @@ function ProviderDoctorListing() {
     if (genderFilter.length > 0 && !genderFilter.includes(doctor.gender)) return false;
     if (ratingRangeFilter && (doctor.rating === null || doctor.rating < ratingRangeFilter[0] || doctor.rating > ratingRangeFilter[1])) return false;
     if (servicesFilter.length > 0 && !servicesFilter.some(service => doctor.services.includes(service))) return false;
+    if (searchTerm && !doctor.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
     return true;
   };
 
@@ -102,6 +104,7 @@ function ProviderDoctorListing() {
     setGenderFilter([]);
     setRatingRangeFilter(null);
     setServicesFilter([]);
+    setSearchTerm('');
     setCurrentPage(1); // Reset to first page after clearing filters
   };
 
@@ -114,7 +117,18 @@ function ProviderDoctorListing() {
 
   return (
     <div className={styles.ListingsContainer}>
+      {/* Search Bar */}
+      <div className={styles.searchBar}>
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
       <div className={styles.providerDoctorListing}>
+        
         <div className={styles.ListSidebar}>
           <Filters
             ratingRangeFilter={ratingRangeFilter}
