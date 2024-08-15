@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import FacilityFilters from './FacilitiesFilter';
 import styles from '../../Styles/ProviderCard.module.css';
 
 type Facility = {
@@ -23,6 +24,10 @@ const ITEMS_PER_PAGE = 9;
 function ProviderFacilityListing() {
   const [facilities, setFacilities] = useState<Facility[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [ratingRangeFilter, setRatingRangeFilter] = useState<[number, number] | null>(null);
+  const [servicesFilter, setServicesFilter] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
   const router = useRouter();
 
   useEffect(() => {
@@ -62,7 +67,7 @@ function ProviderFacilityListing() {
       return <p>No rating</p>;
     }
 
-    const stars = [];
+    const stars: JSX.Element[] = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
         <span key={i} className={i < rating ? styles.filledStar : styles.emptyStar}>
@@ -85,40 +90,84 @@ function ProviderFacilityListing() {
     return bio;
   };
 
+  const applyFilters = (facility: Facility) => {
+    if (ratingRangeFilter && (facility.rating === null || facility.rating < ratingRangeFilter[0] || facility.rating > ratingRangeFilter[1])) return false;
+    if (servicesFilter.length > 0 && !servicesFilter.some(service => facility.services.includes(service))) return false;
+    if (searchTerm && !facility.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+    return true;
+  };
+
+  const handleClearFilters = () => {
+    setRatingRangeFilter(null);
+    setServicesFilter([]);
+    setSearchTerm('');
+    setCurrentPage(1); // Reset to the first page after clearing filters
+  };
+
   const indexOfLastFacility = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstFacility = indexOfLastFacility - ITEMS_PER_PAGE;
-  const currentFacilities = facilities.slice(indexOfFirstFacility, indexOfLastFacility);
+  const filteredFacilities = facilities.filter(applyFilters);
+  const currentFacilities = filteredFacilities.slice(indexOfFirstFacility, indexOfLastFacility);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <>
-      <div>
-        {currentFacilities.map((facility) => (
-          <div key={facility.id} className={styles.CardContainer}>
-            <div>
-              {/* Image and provider tag */}
-              <img src={facility.profileImage} alt={facility.name} />
-              <h4>{facility.providerType}</h4>
-            </div>
-            <div className={styles.contentArea}>
-              {/* Facility details */}
-              <h1>{facility.name}</h1>
-              <div className={styles.stars}>{renderStars(facility.rating)}</div>
-              <p><span>Services:</span> {facility.services.join(' | ')}</p>
-              <p>{truncateBio(facility.bio)}</p>
-              <div className={styles.callToAction}>
-                <button type='button' onClick={() => handleKnowMoreClick(facility.id)}>Know More</button>
+      <div className={styles.ListingsContainer}>
+
+        {/* Search Bar */}
+        <div className={styles.searchBar}>
+            <input
+              type="text"
+              placeholder="Search by name..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+        </div>
+
+        <div className={styles.providerDoctorListing}>
+          
+
+          {/* Facility Filters Sidebar */}
+          <div className={styles.ListSidebar}>
+            <FacilityFilters
+              ratingRangeFilter={ratingRangeFilter}
+              setRatingRangeFilter={setRatingRangeFilter}
+              servicesFilter={servicesFilter}
+              setServicesFilter={setServicesFilter}
+              handleClearFilters={handleClearFilters}
+            />
+          </div>
+          
+          {/* Facility Listing */}
+          <div className={styles.listingArea}>
+            {currentFacilities.map((facility) => (
+              <div key={facility.id} className={styles.CardContainer}>
+                <div>
+                  {/* Image and provider tag */}
+                  <img src={facility.profileImage} alt={facility.name} />
+                  <h4>{facility.providerType}</h4>
+                </div>
+                <div className={styles.contentArea}>
+                  {/* Facility details */}
+                  <h1>{facility.name}</h1>
+                  <div className={styles.stars}>{renderStars(facility.rating)}</div>
+                  <p><span>Services: </span> {facility.services.join(' | ')}</p>
+                  <p>{truncateBio(facility.bio)}</p>
+                  <div className={styles.callToAction}>
+                    <button type='button' onClick={() => handleKnowMoreClick(facility.id)}>Know More</button>
+                  </div>
+                </div>
               </div>
+            ))}
+            <div className={styles.pagination}>
+              {Array.from({ length: Math.ceil(filteredFacilities.length / ITEMS_PER_PAGE) }, (_, index) => (
+                <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
+                  {index + 1}
+                </button>
+              ))}
             </div>
           </div>
-        ))}
-        <div className={styles.pagination}>
-          {Array.from({ length: Math.ceil(facilities.length / ITEMS_PER_PAGE) }, (_, index) => (
-            <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
-              {index + 1}
-            </button>
-          ))}
         </div>
       </div>
     </>
