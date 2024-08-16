@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "../Styles/HomePage.module.css"
 import FeaturedProviders from './FeaturedProviders'
+import LoadingComponents from './LoadingComponents'
 
 function HomeFaeturedlist() {
   return (
@@ -15,6 +16,7 @@ function HomeFaeturedlist() {
 
         <div>
             <FeaturedProviders />
+       
         </div>
     </div>
   )

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../Styles/ProviderCard.module.css';
+import LoadingComponents from './LoadingComponents';
 
 type Provider = {
   bio: string;
@@ -50,6 +51,10 @@ function FeaturedProviders() {
 
         const data = await response.json();
         setProviders(data.providerlist); // Ensure `providerlist` exists in response
+         // Introduce a delay of 3000 milliseconds (3 seconds) before updating state
+        setTimeout(() => {
+          setProviders(data.providerlist); // Ensure `providerlist` exists in the response
+        }, 3000);
       } catch (error) {
         console.error('Error fetching providers:', error);
         setError('Error fetching providers');
@@ -83,7 +88,7 @@ function FeaturedProviders() {
     return stars;
   };
 
-  if (loading) return <p>Loading providers...</p>;
+  if (loading) return <LoadingComponents />;
   if (error) return <p>{error}</p>;
 
   return (
