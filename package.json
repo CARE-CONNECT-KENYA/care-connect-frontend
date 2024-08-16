@@ -10,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@syftdata/next": "^0.1.38-alpha.36",
     "axios": "^1.7.2",
     "http-proxy-middleware": "^3.0.0",

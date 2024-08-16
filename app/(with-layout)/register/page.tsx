@@ -13,6 +13,8 @@ function page() {
     <RegistrationHeader />
     <div className={styles.RegistartionConatiner}>
         <div className={styles.item}>
+          <p>Fill in the for Below to setup(an accout is required) </p>
+
           <RegistrationForm />
         </div>
         <Benefits />
