@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import FacilityFilters from './FacilitiesFilter';
 import styles from '../../Styles/ProviderCard.module.css';
+import LoadingComponents from '../LoadingComponents';
 
 type Facility = {
   bio: string;
@@ -27,6 +28,7 @@ function ProviderFacilityListing() {
   const [ratingRangeFilter, setRatingRangeFilter] = useState<[number, number] | null>(null);
   const [servicesFilter, setServicesFilter] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [loading, setLoading] = useState(true); // New loading state
 
   const router = useRouter();
 
@@ -53,9 +55,15 @@ function ProviderFacilityListing() {
         }
 
         const data = await response.json();
-        setFacilities(data.Facilities); // Ensure the key matches the response from the endpoint
+
+        // Simulate a delay of 3 seconds for loading state
+        setTimeout(() => {
+          setFacilities(data.Facilities);
+          setLoading(false); // Set loading to false after data is fetched
+        }, 3000);
       } catch (error) {
         console.error('Error fetching facilities:', error);
+        setLoading(false); // Ensure loading is set to false even if there's an error
       }
     };
 
@@ -114,20 +122,17 @@ function ProviderFacilityListing() {
   return (
     <>
       <div className={styles.ListingsContainer}>
-
         {/* Search Bar */}
         <div className={styles.searchBar}>
-            <input
-              type="text"
-              placeholder="Search by name..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
 
         <div className={styles.providerDoctorListing}>
-          
-
           {/* Facility Filters Sidebar */}
           <div className={styles.ListSidebar}>
             <FacilityFilters
@@ -138,35 +143,41 @@ function ProviderFacilityListing() {
               handleClearFilters={handleClearFilters}
             />
           </div>
-          
+
           {/* Facility Listing */}
           <div className={styles.listingArea}>
-            {currentFacilities.map((facility) => (
-              <div key={facility.id} className={styles.CardContainer}>
-                <div>
-                  {/* Image and provider tag */}
-                  <img src={facility.profileImage} alt={facility.name} />
-                  <h4>{facility.providerType}</h4>
-                </div>
-                <div className={styles.contentArea}>
-                  {/* Facility details */}
-                  <h1>{facility.name}</h1>
-                  <div className={styles.stars}>{renderStars(facility.rating)}</div>
-                  <p><span>Services: </span> {facility.services.join(' | ')}</p>
-                  <p>{truncateBio(facility.bio)}</p>
-                  <div className={styles.callToAction}>
-                    <button type='button' onClick={() => handleKnowMoreClick(facility.id)}>Know More</button>
+            {loading ? (
+              <LoadingComponents />
+            ) : (
+              currentFacilities.map((facility) => (
+                <div key={facility.id} className={styles.CardContainer}>
+                  <div>
+                    {/* Image and provider tag */}
+                    <img src={facility.profileImage} alt={facility.name} />
+                    <h4>{facility.providerType}</h4>
+                  </div>
+                  <div className={styles.contentArea}>
+                    {/* Facility details */}
+                    <h1>{facility.name}</h1>
+                    <div className={styles.stars}>{renderStars(facility.rating)}</div>
+                    <p><span>Services: </span> {facility.services.join(' | ')}</p>
+                    <p>{truncateBio(facility.bio)}</p>
+                    <div className={styles.callToAction}>
+                      <button type="button" onClick={() => handleKnowMoreClick(facility.id)}>Know More</button>
+                    </div>
                   </div>
                 </div>
+              ))
+            )}
+            {!loading && (
+              <div className={styles.pagination}>
+                {Array.from({ length: Math.ceil(filteredFacilities.length / ITEMS_PER_PAGE) }, (_, index) => (
+                  <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
+                    {index + 1}
+                  </button>
+                ))}
               </div>
-            ))}
-            <div className={styles.pagination}>
-              {Array.from({ length: Math.ceil(filteredFacilities.length / ITEMS_PER_PAGE) }, (_, index) => (
-                <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
-                  {index + 1}
-                </button>
-              ))}
-            </div>
+            )}
           </div>
         </div>
       </div>

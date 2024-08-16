@@ -50,7 +50,7 @@ function FeaturedProviders() {
         }
 
         const data = await response.json();
-        setProviders(data.providerlist); // Ensure `providerlist` exists in response
+        setProviders(data.providerlist); 
          // Introduce a delay of 3000 milliseconds (3 seconds) before updating state
         setTimeout(() => {
           setProviders(data.providerlist); // Ensure `providerlist` exists in the response

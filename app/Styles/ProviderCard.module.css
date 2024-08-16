@@ -12,6 +12,7 @@
 .CardContainer{
     border : solid 1px #ccc;
     display: flex;
+    /* flex-wrap: wrap; */
     gap: 20px;
     border-radius: 3px;
     margin-bottom: 20px;

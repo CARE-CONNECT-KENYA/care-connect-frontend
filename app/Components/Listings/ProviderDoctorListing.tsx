@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../../Styles/ProviderCard.module.css';
 import Filters from './DoctorsFilter';
+import LoadingComponents from '../LoadingComponents';
 
 type Doctor = {
   bio: string;
@@ -29,6 +30,7 @@ function ProviderDoctorListing() {
   const [ratingRangeFilter, setRatingRangeFilter] = useState<[number, number] | null>(null);
   const [servicesFilter, setServicesFilter] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
@@ -38,16 +40,19 @@ function ProviderDoctorListing() {
 
       if (!token) {
         console.error('No access token found');
+        setLoading(false);
         return;
       }
 
       try {
+        await new Promise((resolve) => setTimeout(resolve, 3000)); // Introduce a delay for the loading state
+
         const response = await fetch('care/provider/doctors', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (!response.ok) {
@@ -55,9 +60,13 @@ function ProviderDoctorListing() {
         }
 
         const data = await response.json();
-        setDoctors(data.Doctors);
+        setTimeout(() => {
+          setDoctors(data.Doctors);
+          setLoading(false); // Set loading to false after data is fetched
+        }, 3000);
       } catch (error) {
         console.error('Error fetching doctors:', error);
+        setLoading(false); // Ensure loading is set to false even if there's an error
       }
     };
 
@@ -68,7 +77,7 @@ function ProviderDoctorListing() {
     if (rating === null) {
       return <p>No rating</p>;
     }
-  
+
     const stars: JSX.Element[] = [];
     for (let i = 0; i < 5; i++) {
       stars.push(
@@ -119,16 +128,15 @@ function ProviderDoctorListing() {
     <div className={styles.ListingsContainer}>
       {/* Search Bar */}
       <div className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="Search by name..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
 
       <div className={styles.providerDoctorListing}>
-        
         <div className={styles.ListSidebar}>
           <Filters
             ratingRangeFilter={ratingRangeFilter}
@@ -140,32 +148,38 @@ function ProviderDoctorListing() {
             handleClearFilters={handleClearFilters}
           />
         </div>
-        
+
         <div className={styles.listingArea}>
-          {currentDoctors.map((doctor) => (
-            <div key={doctor.id} className={styles.CardContainer}>
-              <div>
-                <img src={doctor.profileImage} alt={doctor.name} />
-                <h4>{doctor.providerType}</h4>
-              </div>
-              <div className={styles.contentArea}>
-                <h1>{doctor.name}</h1>
-                <div className={styles.stars}>{renderStars(doctor.rating)}</div>
-                <p><span>Specialties : </span> {doctor.services.join(' | ')}</p>
-                <p>{truncateBio(doctor.bio)}</p>
-                <div className={styles.callToAction}>
-                  <button type='button' onClick={() => handleKnowMoreClick(doctor.id)}>Know More</button>
+          {loading ? (
+            <LoadingComponents />
+          ) : (
+            currentDoctors.map((doctor) => (
+              <div key={doctor.id} className={styles.CardContainer}>
+                <div>
+                  <img src={doctor.profileImage} alt={doctor.name} />
+                  <h4>{doctor.providerType}</h4>
+                </div>
+                <div className={styles.contentArea}>
+                  <h1>{doctor.name}</h1>
+                  <div className={styles.stars}>{renderStars(doctor.rating)}</div>
+                  <p><span>Specialties: </span>{doctor.services.join(' | ')}</p>
+                  <p>{truncateBio(doctor.bio)}</p>
+                  <div className={styles.callToAction}>
+                    <button type="button" onClick={() => handleKnowMoreClick(doctor.id)}>Know More</button>
+                  </div>
                 </div>
               </div>
+            ))
+          )}
+          {!loading && (
+            <div className={styles.pagination}>
+              {Array.from({ length: Math.ceil(filteredDoctors.length / ITEMS_PER_PAGE) }, (_, index) => (
+                <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
+                  {index + 1}
+                </button>
+              ))}
             </div>
-          ))}
-          <div className={styles.pagination}>
-            {Array.from({ length: Math.ceil(filteredDoctors.length / ITEMS_PER_PAGE) }, (_, index) => (
-              <button key={index} onClick={() => paginate(index + 1)} className={index + 1 === currentPage ? styles.active : ''}>
-                {index + 1}
-              </button>
-            ))}
-          </div>
+          )}
         </div>
       </div>
     </div>
