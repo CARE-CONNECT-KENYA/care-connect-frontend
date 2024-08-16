@@ -79,8 +79,9 @@
 .FeaturedCardContainer{
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
     justify-content: center;
-    max-width: 90%;
+    place-items: center;
     margin-top: 20px;
     margin-bottom: 20px;   
 }
@@ -93,6 +94,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
 }
+
+
 .pagination {
     display: flex;
     margin-top: 20px;

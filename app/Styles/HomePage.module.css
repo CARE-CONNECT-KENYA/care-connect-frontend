@@ -24,6 +24,7 @@
 /* Home page .categories */
 .CategoriesContainer{
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
     place-items: center;
