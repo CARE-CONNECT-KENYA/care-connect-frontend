@@ -27,3 +27,50 @@
     background-color: white;
     
 }
+
+
+.DashbordSidebar {
+  width: 250px;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.DashbordSidebar.collapsed {
+  width: 60px; /* Adjust the collapsed width */
+}
+
+.sidebarToggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.DashbordSidebar ul {
+  /* padding: 10px; */
+margin-top: 10px;;
+}
+
+.DashbordSidebar ul li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sidebarIcon {
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.DashbordSidebar.collapsed ul li {
+  justify-content: center;
+}
+
+.DashbordSidebar.collapsed .sidebarIcon {
+  margin-right: 0;
+}
+
+.DashbordSidebar.collapsed ul span {
+  display: none;
+}
